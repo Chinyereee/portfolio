@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinyere John-Nnah — Frontend Developer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       NAVIGATION (shared on every page)
+  ══════════════════════════════════ -->
+  <nav>
+    <a class="nav-logo" href="#home" style="text-decoration:none;">CJ</a>
+    <div class="nav-links">
+  <a href="#about" class="nav-link">About Me</a>
+  <a href="#projects" class="nav-link">Projects</a>
+</div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════
+       HOME
+  ══════════════════════════════════ -->
+  <section class="page" id="home">
+
+    <canvas id="sparkleCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+    <div class="home-hero" style="position:relative;z-index:1;">
+      <p class="hero-hello">Hello</p>
+      <div class="hero-name">
+        <span class="first">I'm Chinyere</span>
+        <span class="last">John-Nnah</span>
+      </div>
+      <p class="hero-role">A Frontend Developer</p>
+    </div>
+
+    <div class="home-intro">
+      <div class="home-intro-left">
+        <div class="social-icons">
+
+          <a class="social-icon" href="https://www.linkedin.com/in/chinyere-john-nnah" title="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+
+          <a class="social-icon" href="mailto:chinyerejohnnna@gmail.com" title="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+          </a>
+
+          <a class="social-icon" href="https://github.com/Chinyereee" title="GitHub" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       ABOUT
+  ══════════════════════════════════ -->
+  <section class="page" id="about">
+    <div class="about-wrap">
+
+      <p class="eyebrow">Who I Am</p>
+      <h1 class="page-heading">About <em>Me</em></h1>
+      <div class="page-underline"></div>
+
+      <div class="bio-section">
+        <p class="bio-label">Bio</p>
+        <p>Hi, I'm Chinyere John-Nnah — a <em>self-taught frontend developer</em> based in Port Harcourt, Nigeria. I'm building toward a career in frontend engineering, with a particular interest in <em>Web3 and DeFi interfaces</em>.</p>
+        <p>I work primarily with React, TypeScript, and modern JavaScript. I'm the author
+           of an open-source <em>ethers.js v5 → v6 migration codemod</em> that automates
+           90% of the migration with zero false positives. I'm also an active member of
+           the Women in DeFi community.</p>
+      </div>
+
+      <div class="two-col">
+
+        <div class="col-card">
+          <p class="col-title">Open Source &amp; Community</p>
+          <div class="tl">
+
+            <div class="tl-entry">
+              <p class="tl-date">Apr 2026 — Present</p>
+              <p class="tl-title">ethers-v5-to-v6-codemod</p>
+              <p class="tl-sub">Author &amp; Maintainer · Open Source</p>
+              <p class="tl-body">A jscodeshift codemod that migrates ethers.js v5 codebases
+                 to v6 at the AST level. Tested on Uniswap v3-periphery — 502 lines changed,
+                 90.3% automated coverage, 0 false positives across 154 tests.</p>
+            </div>
+
+            <div class="tl-entry">
+              <p class="tl-date">2023 — Present</p>
+              <p class="tl-title">Women in DeFi</p>
+              <p class="tl-sub">Active Member · Community</p>
+              <p class="tl-body">Member of a global community supporting women contributing
+                 to decentralized finance and Web3. Engaging with builders, sharing
+                 resources, and learning from peers across the ecosystem.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-card">
+          <p class="col-title">Education &amp; Learning</p>
+          <div class="tl">
+
+            <div class="tl-entry">
+              <p class="tl-date">Self-Directed</p>
+              <p class="tl-title">freeCodeCamp</p>
+              <p class="tl-sub">Responsive Web Design + JavaScript</p>
+              <p class="tl-body">Working through the Responsive Web Design and JavaScript
+                 Algorithms &amp; Data Structures curricula at my own pace.</p>
+            </div>
+
+            <div class="tl-entry">
+              <p class="tl-date">Self-Directed</p>
+              <p class="tl-title">Frontend Mentor</p>
+              <p class="tl-sub">UI Challenge Practice</p>
+              <p class="tl-body">Pixel-accurate implementations of real-world UI challenges
+                 from designer specs — strengthening HTML, CSS, and JavaScript fundamentals.</p>
+            </div>
+
+            <div class="tl-entry">
+              <p class="tl-date">Self-Directed</p>
+              <p class="tl-title">Blockchain Development</p>
+              <p class="tl-sub">Web3 + Solidity Fundamentals</p>
+              <p class="tl-body">Studying smart-contract patterns, Ethereum tooling, and the libraries behind production DeFi frontends — including ethers.js, which I now contribute back to via my v5→v6 migration codemod.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- "Currently" personality block -->
+      <div class="currently">
+        <p class="currently-label">Currently</p>
+        <div class="currently-grid">
+          <div>
+            <p class="currently-item-label">Building</p>
+            <p class="currently-item-value">Web3 frontends with Next.js, TypeScript, and ethers.js</p>
+          </div>
+          <div>
+            <p class="currently-item-label">Learning</p>
+            <p class="currently-item-value">Smart-contract patterns, AST tooling, and shipping production-grade frontends</p>
+          </div>
+          <div>
+            <p class="currently-item-label">Writing</p>
+            <p class="currently-item-value">Technical articles on Dev.to, Medium, and Coder Legion about Web3 and developer tooling</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       PROJECTS
+  ══════════════════════════════════ -->
+  <section class="page" id="projects">
+    <div class="projects-wrap">
+
+      <p class="eyebrow">What I've Shipped</p>
+      <h1 class="page-heading">My <em>Projects</em></h1>
+      <div class="page-underline"></div>
+
+      <div class="projects-grid">
+
+        <!--
+          Project 01 — Gas Tracker Dashboard
+          The whole card is wrapped in <a> so it's clickable.
+          Update the href once you deploy the gas-tracker to Vercel.
+        -->
+        <a class="proj-card" href="https://gas-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">01</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 01 · Live</p>
+            <h3 class="proj-name">Gas Tracker Dashboard</h3>
+            <p class="proj-desc">Real-time Ethereum gas price tracker with a 24-hour
+               history chart and a "transact now?" indicator. Live data via the
+               Etherscan API.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">Tailwind</span>
+              <span class="proj-tag">Etherscan API</span>
+            </div>
+            <span class="proj-link">Open Live Demo →</span>
+          </div>
+        </a>
+
+        <!--
+          Project 02 — AI Article Summarizer
+          Update the href once you deploy the ai-summarizer to Vercel.
+        -->
+        <a class="proj-card" href="https://ai-summarizer-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">02</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 02 · Live</p>
+            <h3 class="proj-name">AI Article Summarizer</h3>
+            <p class="proj-desc">Paste any article URL and get back a clean summary with
+               the key points pulled out. Built around Groq with Mozilla Readability for
+               content extraction.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">shadcn/ui</span>
+              <span class="proj-tag">Groq AI</span>
+            </div>
+            <span class="proj-link">Open Live Demo →</span>
+          </div>
+        </a>
+
+        <!--
+          Project 03 — DeFi Portfolio Tracker
+          Update the href once you deploy the defi-tracker to Vercel.
+        -->
+        <a class="proj-card" href="https://defi-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">03</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 03 · Live</p>
+            <h3 class="proj-name">DeFi Portfolio Tracker</h3>
+            <p class="proj-desc">Paste a wallet address (or ENS) and see its holdings
+               across Ethereum, Polygon, and Base, with USD values and an allocation
+               chart. Alchemy for chain reads, CoinGecko for prices.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">ethers.js</span>
+              <span class="proj-tag">Recharts</span>
+            </div>
+            <span class="proj-link">Open Live Demo →</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Featured Open Source -->
+      <div style="margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(160,0,240,0.2);">
+        <p class="eyebrow" style="text-align:center;">Featured Open Source</p>
+        <h2 style="text-align:center;font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;margin:0.6rem 0 1.2rem;letter-spacing:1px;">
+          ethers-v5-to-v6-codemod
+        </h2>
+        <p style="text-align:center;max-width:680px;margin:0 auto 2rem;font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:1.8;">
+          A jscodeshift codemod that migrates ethers.js v5 codebases to v6 at the AST
+          level. Tested on Uniswap v3-periphery — 28 of 31 files migrated automatically,
+          502 lines changed, 90.3% coverage, 0 false positives across 154 tests.
+        </p>
+        <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+          <span class="proj-tag">TypeScript</span>
+          <span class="proj-tag">jscodeshift</span>
+          <span class="proj-tag">recast</span>
+          <span class="proj-tag">Web3</span>
+          <span class="proj-tag">Open Source</span>
+        </div>
+        <div style="text-align:center;">
+          <a href="https://github.com/Chinyereee/ethers-v5-to-v6-codemod"
+             target="_blank" rel="noopener noreferrer"
+             class="proj-link"
+             style="text-decoration:none;display:inline-block;">
+            View on GitHub →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Scripts: nav.js is shared, sparkles.js only loads on home -->
+  <script src="nav.js"></script>
+  <script src="sparkles.js"></script>
+
+</body>
+</html>
