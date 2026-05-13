@@ -507,7 +507,7 @@ nav {
 .projects-wrap {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 130px 3rem 6rem;
+  padding: 80px 3rem 6rem;
 }
 
 .projects-grid {
@@ -552,7 +552,7 @@ nav {
 .proj-card:hover .proj-link { transform: translateX(6px); color: var(--white); }
 
 .proj-thumb {
-  width: 100%; aspect-ratio: 16/9;
+  width: 100%; height: 56px;
   background: linear-gradient(135deg, var(--dark-3), var(--dark-2));
   display: flex; align-items: center; justify-content: center;
   border-bottom: 1px solid rgba(168,85,247,0.15);
@@ -576,9 +576,9 @@ nav {
 }
 .proj-thumb-num {
   font-family: 'Syne', sans-serif;
-  font-size: 4.5rem;
+  font-size: 2rem;
   font-weight: 800;
-  color: rgba(168,85,247,0.30);
+  color: rgba(168,85,247,0.35);
   position: relative; z-index: 1;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -661,7 +661,7 @@ nav {
   nav { padding: 0.9rem 1.2rem; }
   .home-hero { padding: 110px 1.5rem 2rem; }
   .home-intro { padding: 1rem 1.5rem 3rem; }
-  .about-wrap, .projects-wrap { padding: 110px 1.5rem 4rem; }
+  .about-wrap, .projects-wrap { padding: 80px 1.5rem 4rem; }
   .projects-grid { grid-template-columns: 1fr; }
   .bio-section { padding: 1.75rem 1.5rem; }
   .col-card { padding: 1.75rem 1.5rem; }

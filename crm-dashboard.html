@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NexusCRM — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --purple:        #a855f7;
+  --purple-bright: #c084fc;
+  --purple-soft:   #7c3aed;
+  --purple-dim:    rgba(168,85,247,0.10);
+  --purple-border: rgba(168,85,247,0.22);
+  --pink:          #f472b6;
+  --pink-bright:   #f9a8d4;
+  --white:         #f5f3ff;
+  --white-soft:    rgba(245,243,255,0.78);
+  --white-mute:    rgba(245,243,255,0.55);
+  --white-dim:     rgba(245,243,255,0.35);
+  --dark:          #0a0612;
+  --dark-2:        #110a1f;
+  --dark-3:        #181028;
+  --easing:        cubic-bezier(0.16, 1, 0.3, 1);
+  --sb-w:          220px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow:hidden; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(168,85,247,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events:none; z-index:0;
+  mask-image: radial-gradient(ellipse at center top, black 30%, transparent 80%);
+}
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background: var(--purple-soft); border-radius:2px; }
+
+/* ── SHELL ── */
+.shell { display:flex; height:100vh; overflow:hidden; position:relative; z-index:1; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width:var(--sb-w); flex-shrink:0;
+  background: rgba(10,6,18,0.88);
+  backdrop-filter: blur(24px) saturate(140%);
+  border-right: 1px solid var(--purple-border);
+  display:flex; flex-direction:column;
+  height:100vh; overflow:hidden;
+  position:relative; z-index:10;
+}
+.sb-brand {
+  padding:1rem 1rem 0.9rem;
+  border-bottom:1px solid var(--purple-border);
+  display:flex; align-items:center; gap:10px;
+}
+.sb-logo {
+  width:28px; height:28px; border-radius:7px;
+  background:linear-gradient(135deg,var(--purple-soft),var(--purple-bright));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
+  color:#fff; flex-shrink:0;
+  box-shadow:0 0 14px rgba(168,85,247,0.35);
+}
+.sb-name {
+  font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700;
+  color:var(--white); letter-spacing:0.02em;
+}
+.sb-name span { color:var(--purple-bright); }
+.sb-sub {
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+  color:var(--white-dim); letter-spacing:0.1em;
+}
+
+/* sidebar stats strip */
+.sb-strip {
+  padding:0.75rem 1rem;
+  border-bottom:1px solid var(--purple-border);
+  background:rgba(168,85,247,0.03);
+  display:grid; grid-template-columns:1fr 1fr; gap:0.65rem;
+}
+.sb-strip-item label {
+  display:block; font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase;
+  color:var(--white-dim); margin-bottom:2px;
+}
+.sb-strip-item strong {
+  font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700;
+  color:var(--white);
+}
+.sb-strip-item.accent strong { color:var(--purple-bright); }
+
+.sb-nav { flex:1; padding:0.75rem 0.5rem; overflow-y:auto; }
+.sb-section-label {
+  font-family:'JetBrains Mono',monospace; font-size:0.58rem;
+  font-weight:500; letter-spacing:0.35em; text-transform:uppercase;
+  color:var(--white-dim); padding:0.75rem 0.75rem 0.4rem;
+}
+.nav-item {
+  display:flex; align-items:center; gap:10px;
+  padding:0.6rem 0.75rem; border-radius:7px;
+  font-size:0.82rem; font-weight:500;
+  color:var(--white-mute); cursor:pointer;
+  transition:all 0.25s var(--easing);
+  position:relative; white-space:nowrap; margin-bottom:2px;
+}
+.nav-item svg { width:13px; height:13px; flex-shrink:0; }
+.nav-item:hover { background:var(--purple-dim); color:var(--white-soft); }
+.nav-item.active {
+  background:rgba(168,85,247,0.14);
+  color:var(--white);
+  border:1px solid var(--purple-border);
+}
+.nav-item.active svg { color:var(--purple-bright); }
+.nav-item.active::before {
+  content:''; position:absolute; left:0; top:25%; bottom:25%; width:2px;
+  background:linear-gradient(to bottom,var(--purple-bright),var(--pink));
+  border-radius:0 2px 2px 0;
+}
+.sb-bottom {
+  padding:0.65rem 0.75rem;
+  border-top:1px solid var(--purple-border);
+}
+.sb-user {
+  display:flex; align-items:center; gap:10px;
+  padding:0.55rem 0.65rem; border-radius:7px;
+  cursor:pointer; transition:.2s;
+}
+.sb-user:hover { background:var(--purple-dim); }
+.sb-avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:linear-gradient(135deg,var(--purple-soft),var(--pink));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:9px; font-weight:700;
+  color:#fff; flex-shrink:0; border:1px solid var(--purple-border);
+}
+.sb-user-name { font-size:0.8rem; font-weight:600; color:var(--white-soft); }
+.sb-user-role { font-size:0.65rem; color:var(--white-dim); font-family:'JetBrains Mono',monospace; }
+
+/* ── MAIN ── */
+.main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; }
+
+/* ── TOPBAR ── */
+.topbar {
+  height:56px; flex-shrink:0;
+  background:rgba(10,6,18,0.72);
+  backdrop-filter:blur(24px) saturate(140%);
+  border-bottom:1px solid var(--purple-border);
+  display:flex; align-items:center;
+  padding:0 1.5rem; gap:1rem; position:relative; z-index:5;
+}
+.topbar-title {
+  font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700;
+  color:var(--white); flex:1; letter-spacing:-0.01em;
+}
+.topbar-title span {
+  font-family:'Inter',sans-serif; font-weight:400;
+  font-size:0.78rem; color:var(--white-dim); margin-left:8px;
+}
+.live-badge {
+  display:flex; align-items:center; gap:6px;
+  padding:4px 10px; border-radius:20px;
+  border:1px solid rgba(52,211,153,0.3);
+  background:rgba(52,211,153,0.08);
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+  color:#34d399; font-weight:500; letter-spacing:0.1em;
+}
+.live-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:#34d399; box-shadow:0 0 6px #34d399;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.85)} }
+.tb-avatar {
+  width:32px; height:32px; border-radius:50%;
+  background:linear-gradient(135deg,var(--purple-soft),var(--pink));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:10px; font-weight:700;
+  color:#fff; border:1px solid var(--purple-border); cursor:pointer;
+}
+
+/* ── CONTENT ── */
+.content { flex:1; overflow-y:auto; padding:1.5rem; }
+.page { display:none; animation:fadeUp 0.3s var(--easing); }
+.page.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── PAGE HEADER ── */
+.page-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:1.25rem; }
+.page-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--white); margin-bottom:2px; }
+.page-sub { font-size:0.78rem; color:var(--white-dim); font-family:'JetBrains Mono',monospace; }
+
+/* ── PANEL (glass card equivalent) ── */
+.panel {
+  background:rgba(17,10,31,0.55);
+  border:1px solid var(--purple-border);
+  border-radius:12px;
+  backdrop-filter:blur(8px);
+  position:relative; overflow:hidden;
+}
+.panel::before {
+  content:''; position:absolute; top:0; left:1.25rem; right:1.25rem; height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple-bright) 20%,var(--pink) 80%,transparent);
+}
+.panel-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.25rem 0.75rem;
+}
+.panel-title {
+  font-family:'Syne',sans-serif; font-size:0.85rem; font-weight:700; color:var(--white);
+}
+.panel-sub { font-size:0.72rem; color:var(--white-dim); font-family:'JetBrains Mono',monospace; margin-top:1px; }
+
+/* ── STAT STRIP ── */
+.stat-strip { display:flex; }
+.stat-strip-divider { width:1px; background:rgba(168,85,247,0.12); flex-shrink:0; }
+.stat-item { flex:1; padding:1rem 1.25rem; }
+.stat-label {
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+  letter-spacing:0.25em; text-transform:uppercase; color:var(--white-dim); margin-bottom:6px;
+}
+.stat-value { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+.stat-change { font-size:0.72rem; font-family:'JetBrains Mono',monospace; }
+.stat-change.up { color:#34d399; }
+.stat-change.down { color:#f87171; }
+
+/* ── CHARTS ROW ── */
+.charts-row { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:1rem; margin-bottom:1rem; }
+
+/* Simple SVG chart styles */
+.chart-wrap { padding:0 1.25rem 1.25rem; }
+
+/* ── TABLES ROW ── */
+.tables-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+/* ── TABLE ── */
+table { width:100%; border-collapse:collapse; }
+th {
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem;
+  font-weight:500; letter-spacing:0.25em; text-transform:uppercase;
+  color:var(--white-dim); text-align:left; padding:0.75rem 1rem;
+  border-bottom:1px solid rgba(168,85,247,0.10);
+}
+td { padding:0.65rem 1rem; font-size:0.8rem; color:var(--white-soft); }
+tr:not(:last-child) td { border-bottom:1px solid rgba(168,85,247,0.06); }
+tbody tr:hover td { background:rgba(168,85,247,0.04); }
+
+/* ── TAGS ── */
+.tag {
+  display:inline-block; padding:2px 8px; border-radius:4px;
+  font-family:'JetBrains Mono',monospace; font-size:0.6rem; font-weight:500;
+  letter-spacing:0.04em;
+}
+.tag.green  { background:rgba(52,211,153,0.10); color:#34d399; border:1px solid rgba(52,211,153,0.22); }
+.tag.purple { background:rgba(168,85,247,0.10); color:#d8b4fe; border:1px solid rgba(168,85,247,0.22); }
+.tag.amber  { background:rgba(251,191,36,0.10); color:#fbbf24; border:1px solid rgba(251,191,36,0.22); }
+.tag.red    { background:rgba(248,113,113,0.10); color:#f87171; border:1px solid rgba(248,113,113,0.22); }
+.tag.pink   { background:rgba(244,114,182,0.10); color:#f9a8d4; border:1px solid rgba(244,114,182,0.22); }
+.tag.muted  { background:rgba(245,243,255,0.05); color:var(--white-dim); border:1px solid rgba(245,243,255,0.10); }
+
+/* ── AVATAR ── */
+.av {
+  width:26px; height:26px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:9px; font-weight:700; color:#fff; flex-shrink:0;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 14px; border-radius:7px;
+  background:linear-gradient(135deg,var(--purple-soft),var(--purple));
+  color:#fff; font-size:0.78rem; font-weight:600;
+  border:none; cursor:pointer; transition:all .25s;
+  font-family:'Inter',sans-serif;
+}
+.btn-primary:hover { transform:translateY(-1px); box-shadow:0 8px 20px rgba(168,85,247,0.35); }
+.btn-ghost {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:5px 12px; border-radius:7px;
+  background:rgba(168,85,247,0.06); color:var(--white-mute);
+  border:1px solid var(--purple-border); font-size:0.75rem; font-weight:500;
+  cursor:pointer; transition:all .25s; font-family:'Inter',sans-serif;
+}
+.btn-ghost:hover { border-color:var(--purple-bright); color:var(--white-soft); }
+
+/* ── FILTER PILLS ── */
+.pill {
+  display:inline-flex; align-items:center; padding:4px 10px; border-radius:20px;
+  font-size:0.72rem; font-weight:500; cursor:pointer;
+  border:1px solid rgba(168,85,247,0.18); color:var(--white-dim);
+  background:transparent; transition:all .2s; font-family:'Inter',sans-serif;
+}
+.pill.active, .pill:hover {
+  border-color:var(--purple-bright); color:var(--purple-bright);
+  background:rgba(168,85,247,0.10);
+}
+.pill-row { display:flex; gap:6px; flex-wrap:wrap; }
+
+/* ── SEARCH INPUT ── */
+.search-wrap {
+  display:flex; align-items:center; gap:8px;
+  background:rgba(168,85,247,0.06); border:1px solid var(--purple-border);
+  border-radius:8px; padding:5px 12px; width:200px; transition:.3s;
+}
+.search-wrap:focus-within { border-color:var(--purple-bright); }
+.search-wrap input { background:none; border:none; outline:none; font-size:0.78rem; color:var(--white); width:100%; font-family:'Inter',sans-serif; }
+.search-wrap input::placeholder { color:var(--white-dim); }
+
+/* ── PROGRESS BAR ── */
+.progress-bar { height:4px; border-radius:2px; background:rgba(168,85,247,0.12); overflow:hidden; }
+.progress-bar-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--purple-soft),var(--purple-bright)); }
+
+/* ── SETTINGS FORM ── */
+.settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.settings-form-field { margin-bottom:1rem; }
+.settings-form-field label {
+  display:block; font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--white-dim); margin-bottom:6px;
+}
+.settings-form-field input {
+  width:100%; background:rgba(168,85,247,0.04); border:1px solid rgba(168,85,247,0.15);
+  border-radius:7px; padding:8px 12px; font-size:0.78rem; color:var(--white-soft);
+  outline:none; transition:all .25s; font-family:'Inter',sans-serif;
+}
+.settings-form-field input:focus { border-color:var(--purple-bright); background:rgba(168,85,247,0.07); }
+.toggle-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(168,85,247,0.07); }
+.toggle-row:last-child { border-bottom:none; }
+.toggle-label { font-size:0.8rem; font-weight:500; color:var(--white-soft); }
+.toggle-sub { font-size:0.7rem; color:var(--white-dim); margin-top:2px; }
+.toggle {
+  width:36px; height:20px; border-radius:10px; border:1px solid;
+  position:relative; cursor:pointer; transition:all .3s;
+  background:rgba(168,85,247,0.08); border-color:rgba(168,85,247,0.2);
+  flex-shrink:0;
+}
+.toggle.on { background:linear-gradient(90deg,var(--purple-soft),var(--purple-bright)); border-color:var(--purple-bright); }
+.toggle::after {
+  content:''; position:absolute; top:3px; left:3px;
+  width:12px; height:12px; border-radius:50%;
+  background:#fff; transition:left .3s;
+}
+.toggle.on::after { left:19px; }
+
+/* ── PAGINATION ── */
+.pagination { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; border-top:1px solid rgba(168,85,247,0.1); }
+.pagination-info { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--white-dim); }
+.page-btns { display:flex; gap:4px; }
+.page-btn {
+  width:28px; height:28px; border-radius:6px; border:1px solid rgba(168,85,247,0.12);
+  background:none; color:var(--white-dim); font-size:0.72rem; cursor:pointer;
+  transition:all .2s; font-family:'JetBrains Mono',monospace; display:flex; align-items:center; justify-content:center;
+}
+.page-btn:hover, .page-btn.active { border-color:var(--purple); color:var(--purple-bright); background:rgba(168,85,247,0.12); }
+
+/* ── UTILITIES ── */
+.flex { display:flex; } .items-center { align-items:center; } .gap-2 { gap:8px; } .gap-3 { gap:12px; }
+.mb-1 { margin-bottom:1rem; } .mb-2 { margin-bottom:1.25rem; }
+.space-y > * + * { margin-top:1rem; }
+.font-bold { font-weight:700; } .font-semi { font-weight:600; }
+.text-purple { color:var(--purple-bright); } .text-pink { color:var(--pink-bright); }
+.text-dim { color:var(--white-dim); } .text-mute { color:var(--white-mute); }
+.font-mono { font-family:'JetBrains Mono',monospace; }
+.font-syne { font-family:'Syne',sans-serif; }
+.truncate { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ═══ SIDEBAR ═══════════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo">N</div>
+      <div>
+        <div class="sb-name">Nexus<span>CRM</span></div>
+        <div class="sb-sub">Enterprise Suite</div>
+      </div>
+    </div>
+
+    <div class="sb-strip">
+      <div class="sb-strip-item">
+        <label>Contacts</label>
+        <strong>1,284</strong>
+      </div>
+      <div class="sb-strip-item">
+        <label>Companies</label>
+        <strong>348</strong>
+      </div>
+      <div class="sb-strip-item">
+        <label>Open Tasks</label>
+        <strong>94</strong>
+      </div>
+      <div class="sb-strip-item accent">
+        <label>Pipeline</label>
+        <strong>$285k</strong>
+      </div>
+    </div>
+
+    <nav class="sb-nav">
+      <div class="sb-section-label">Navigation</div>
+      <div class="nav-item active" onclick="showPage('overview',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </div>
+      <div class="nav-item" onclick="showPage('contacts',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Contacts
+      </div>
+      <div class="nav-item" onclick="showPage('companies',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Companies
+      </div>
+      <div class="nav-item" onclick="showPage('tasks',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Tasks
+      </div>
+      <div class="sb-section-label">Admin</div>
+      <div class="nav-item" onclick="showPage('settings',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </div>
+    </nav>
+
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-avatar">CJ</div>
+        <div>
+          <div class="sb-user-name">Chinyere J.</div>
+          <div class="sb-user-role">Admin · NexusCRM</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ════════════════════════════════════════════════════ -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title" id="topbarTitle">Overview <span id="topbarSub">Today's summary</span></div>
+      <div class="live-badge"><div class="live-dot"></div> LIVE</div>
+      <div class="tb-avatar">CJ</div>
+    </header>
+
+    <div class="content">
+
+      <!-- ══ OVERVIEW ══════════════════════════════════════════════ -->
+      <div class="page active" id="page-overview">
+        <div class="page-header">
+          <div>
+            <div class="page-title">CRM Overview</div>
+            <div class="page-sub" id="overviewDate"></div>
+          </div>
+          <button class="btn-primary">+ New Contact</button>
+        </div>
+
+        <!-- Stat strip -->
+        <div class="panel mb-2">
+          <div class="stat-strip">
+            <div class="stat-item">
+              <div class="stat-label">Total Contacts</div>
+              <div class="stat-value">1,284</div>
+              <div class="stat-change up">+2.3% this week</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">Companies</div>
+              <div class="stat-value">348</div>
+              <div class="stat-change up">+1.1% this week</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">Open Tasks</div>
+              <div class="stat-value">94</div>
+              <div class="stat-change down">-3 from last week</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">Pipeline Value</div>
+              <div class="stat-value" style="color:var(--purple-bright)">$285k</div>
+              <div class="stat-change up">+5.4% this month</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">Win Rate</div>
+              <div class="stat-value">68%</div>
+              <div class="stat-change up">+3.2% this month</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts row -->
+        <div class="charts-row mb-2">
+          <!-- Activity chart -->
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Contact Activity</div>
+                <div class="panel-sub">This week</div>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 320 110" style="width:100%;height:110px">
+                <defs>
+                  <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stop-color="#a855f7" stop-opacity="0.2"/>
+                    <stop offset="95%" stop-color="#a855f7" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="al" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#f472b6"/>
+                  </linearGradient>
+                </defs>
+                <!-- data: Mon=4, Tue=7, Wed=5, Thu=9, Fri=12, Sat=3, Sun=6 (max=12) -->
+                <!-- scale: y = 100 - (v/12)*90 -->
+                <path d="M 10,100 L 10,67 C 56,67 56,42 57,42 C 103,42 103,58 104,58 C 150,58 150,25 151,25 C 197,25 197,10 198,10 C 244,10 244,93 245,93 C 291,93 291,55 310,55 L 310,100 Z" fill="url(#ag)"/>
+                <path d="M 10,67 C 56,67 56,42 57,42 C 103,42 103,58 104,58 C 150,58 150,25 151,25 C 197,25 197,10 198,10 C 244,10 244,93 245,93 C 291,93 291,55 310,55" fill="none" stroke="url(#al)" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- dots -->
+                <circle cx="10" cy="67" r="3" fill="#a855f7"/>
+                <circle cx="57" cy="42" r="3" fill="#a855f7"/>
+                <circle cx="104" cy="58" r="3" fill="#a855f7"/>
+                <circle cx="151" cy="25" r="3" fill="#a855f7"/>
+                <circle cx="198" cy="10" r="3" fill="#f472b6"/>
+                <circle cx="245" cy="93" r="3" fill="#a855f7"/>
+                <circle cx="310" cy="55" r="3" fill="#a855f7"/>
+                <!-- x-axis labels -->
+                <text x="10"  y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Mon</text>
+                <text x="57"  y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Tue</text>
+                <text x="104" y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Wed</text>
+                <text x="151" y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Thu</text>
+                <text x="198" y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Fri</text>
+                <text x="245" y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Sat</text>
+                <text x="310" y="110" fill="rgba(245,243,255,0.25)" font-size="9" font-family="JetBrains Mono" text-anchor="middle">Sun</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Pipeline chart -->
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Pipeline ($k)</div>
+                <div class="panel-sub">2025</div>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 200 110" style="width:100%;height:110px">
+                <!-- data: Jan=220,Feb=260,Mar=240,Apr=310,May=350,Jun=280,Jul=390,Aug=420 (max=420) -->
+                <!-- bar height = (v/420)*90; y = 90 - height -->
+                <!-- bar width=18, gap=7, start x=5 -->
+                <rect x="5"   y="43" width="18" height="47" rx="2" fill="rgba(124,58,237,0.55)"/>
+                <rect x="30"  y="34" width="18" height="56" rx="2" fill="rgba(124,58,237,0.55)"/>
+                <rect x="55"  y="39" width="18" height="51" rx="2" fill="rgba(124,58,237,0.55)"/>
+                <rect x="80"  y="24" width="18" height="66" rx="2" fill="rgba(124,58,237,0.55)"/>
+                <rect x="105" y="15" width="18" height="75" rx="2" fill="#a855f7"/>
+                <rect x="130" y="30" width="18" height="60" rx="2" fill="rgba(124,58,237,0.55)"/>
+                <rect x="155" y="7"  width="18" height="83" rx="2" fill="#a855f7"/>
+                <rect x="180" y="0"  width="18" height="90" rx="2" fill="#c084fc"/>
+                <!-- labels -->
+                <text x="14"  y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Jan</text>
+                <text x="39"  y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Feb</text>
+                <text x="64"  y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Mar</text>
+                <text x="89"  y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Apr</text>
+                <text x="114" y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">May</text>
+                <text x="139" y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Jun</text>
+                <text x="164" y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Jul</text>
+                <text x="189" y="107" fill="rgba(245,243,255,0.22)" font-size="8" font-family="JetBrains Mono" text-anchor="middle">Aug</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="panel">
+            <div class="panel-header"><div class="panel-title">Breakdown</div></div>
+            <div style="padding:0.75rem 1.25rem">
+              <div style="margin-bottom:0.9rem">
+                <div class="flex items-center" style="justify-content:space-between;margin-bottom:4px">
+                  <span style="font-size:0.72rem;color:var(--white-mute)">Clients</span>
+                  <span class="font-mono" style="font-size:0.68rem;color:var(--white-dim)">42%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width:42%"></div></div>
+              </div>
+              <div style="margin-bottom:0.9rem">
+                <div class="flex items-center" style="justify-content:space-between;margin-bottom:4px">
+                  <span style="font-size:0.72rem;color:var(--white-mute)">Leads</span>
+                  <span class="font-mono" style="font-size:0.68rem;color:var(--white-dim)">28%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width:28%;background:linear-gradient(90deg,#7c3aed,#f472b6)"></div></div>
+              </div>
+              <div style="margin-bottom:0.9rem">
+                <div class="flex items-center" style="justify-content:space-between;margin-bottom:4px">
+                  <span style="font-size:0.72rem;color:var(--white-mute)">Prospects</span>
+                  <span class="font-mono" style="font-size:0.68rem;color:var(--white-dim)">20%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width:20%;background:linear-gradient(90deg,#7c3aed,#a855f7)"></div></div>
+              </div>
+              <div>
+                <div class="flex items-center" style="justify-content:space-between;margin-bottom:4px">
+                  <span style="font-size:0.72rem;color:var(--white-mute)">Churned</span>
+                  <span class="font-mono" style="font-size:0.68rem;color:var(--white-dim)">10%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width:10%;background:rgba(248,113,113,0.6)"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tables row -->
+        <div class="tables-row">
+          <!-- Recent Contacts -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Recent Contacts</div>
+              <button class="btn-ghost" onclick="showPage('contacts',document.querySelector('[onclick*=contacts]'))">View All</button>
+            </div>
+            <table>
+              <thead><tr><th>Name</th><th>Company</th><th>Tag</th><th>Last Contact</th></tr></thead>
+              <tbody>
+                <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#581c87,#7c3aed)">AO</div><span class="font-semi" style="color:var(--white)">Amara Osei</span></div></td><td class="text-mute">TechCorp</td><td><span class="tag green">Client</span></td><td class="font-mono text-dim">2h ago</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#2e1065,#4c1d95)">JL</div><span class="font-semi" style="color:var(--white)">James Lee</span></div></td><td class="text-mute">StartupCo</td><td><span class="tag purple">Lead</span></td><td class="font-mono text-dim">5h ago</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#064e3b,#065f46)">SP</div><span class="font-semi" style="color:var(--white)">Sofia Petrov</span></div></td><td class="text-mute">Agency EU</td><td><span class="tag amber">Prospect</span></td><td class="font-mono text-dim">1 day ago</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#78350f,#92400e)">KN</div><span class="font-semi" style="color:var(--white)">Kwame Nkrumah</span></div></td><td class="text-mute">DevGH</td><td><span class="tag green">Client</span></td><td class="font-mono text-dim">3 days ago</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#1e3a5f,#1e40af)">LM</div><span class="font-semi" style="color:var(--white)">Luca Moretti</span></div></td><td class="text-mute">Ventures IT</td><td><span class="tag pink">Partner</span></td><td class="font-mono text-dim">4h ago</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#831843,#9d174d)">YT</div><span class="font-semi" style="color:var(--white)">Yuki Tanaka</span></div></td><td class="text-mute">SaaS Japan</td><td><span class="tag green">Client</span></td><td class="font-mono text-dim">Yesterday</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Open Tasks -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Open Tasks</div>
+              <button class="btn-primary">+ Add</button>
+            </div>
+            <table>
+              <thead><tr><th>Task</th><th>Priority</th><th>Due</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="font-semi" style="color:var(--white-soft);max-width:160px"><span class="truncate" style="display:block">Follow up with TechCorp</span></td><td><span class="tag red">High</span></td><td class="font-mono text-pink" style="font-size:0.7rem">Today</td><td><span class="tag purple">In Progress</span></td></tr>
+                <tr><td class="font-semi" style="color:var(--white-soft);max-width:160px"><span class="truncate" style="display:block">Send proposal to Corp AE</span></td><td><span class="tag red">High</span></td><td class="font-mono text-dim" style="font-size:0.7rem">Tomorrow</td><td><span class="tag muted">Todo</span></td></tr>
+                <tr><td class="font-semi" style="color:var(--white-soft);max-width:160px"><span class="truncate" style="display:block">Onboarding — SaaS Japan</span></td><td><span class="tag amber">Medium</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 15</td><td><span class="tag purple">In Progress</span></td></tr>
+                <tr><td class="font-semi" style="color:var(--white-soft);max-width:160px"><span class="truncate" style="display:block">Renewal — Ventures IT</span></td><td><span class="tag red">High</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 14</td><td><span class="tag muted">Todo</span></td></tr>
+                <tr><td class="font-semi" style="color:var(--white-soft);max-width:160px"><span class="truncate" style="display:block">Quarterly review deck</span></td><td><span class="tag amber">Medium</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 20</td><td><span class="tag purple">In Progress</span></td></tr>
+                <tr><td class="font-semi" style="color:var(--white-soft);max-width:160px"><span class="truncate" style="display:block">Invoice StartupCo</span></td><td><span class="tag red">High</span></td><td class="font-mono text-pink" style="font-size:0.7rem">Today</td><td><span class="tag muted">Todo</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ CONTACTS ══════════════════════════════════════════════ -->
+      <div class="page" id="page-contacts">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Contacts</div>
+            <div class="page-sub">10 records</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn-ghost">Export CSV</button>
+            <button class="btn-primary">+ Add Contact</button>
+          </div>
+        </div>
+        <div class="flex items-center mb-1" style="justify-content:space-between">
+          <div class="pill-row">
+            <span class="pill active">All</span>
+            <span class="pill">Client</span>
+            <span class="pill">Lead</span>
+            <span class="pill">Prospect</span>
+            <span class="pill">Partner</span>
+            <span class="pill">Churned</span>
+          </div>
+          <div class="search-wrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(245,243,255,0.35)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search contacts..."/></div>
+        </div>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:32px"><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></th>
+                <th>Name</th><th>Email</th><th>Role</th><th>Company</th><th>Status</th><th>Tag</th><th>Last Contact</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#581c87,#7c3aed)">AO</div><span class="font-semi" style="color:var(--white)">Amara Osei</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">amara@techcorp.io</td><td class="text-mute">CEO</td><td style="color:var(--white-soft)">TechCorp</td><td><span class="tag green">Active</span></td><td><span class="tag green">Client</span></td><td class="font-mono text-dim" style="font-size:0.7rem">2h ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#2e1065,#4c1d95)">JL</div><span class="font-semi" style="color:var(--white)">James Lee</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">j.lee@startup.co</td><td class="text-mute">CTO</td><td style="color:var(--white-soft)">StartupCo</td><td><span class="tag green">Active</span></td><td><span class="tag purple">Lead</span></td><td class="font-mono text-dim" style="font-size:0.7rem">5h ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#064e3b,#065f46)">SP</div><span class="font-semi" style="color:var(--white)">Sofia Petrov</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">sofia@agency.eu</td><td class="text-mute">Head of Design</td><td style="color:var(--white-soft)">Agency EU</td><td><span class="tag amber">Prospect</span></td><td><span class="tag amber">Prospect</span></td><td class="font-mono text-dim" style="font-size:0.7rem">1 day ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#78350f,#92400e)">KN</div><span class="font-semi" style="color:var(--white)">Kwame Nkrumah</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">k.nkrumah@dev.gh</td><td class="text-mute">Product Manager</td><td style="color:var(--white-soft)">DevGH</td><td><span class="tag green">Active</span></td><td><span class="tag green">Client</span></td><td class="font-mono text-dim" style="font-size:0.7rem">3 days ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#7f1d1d,#991b1b)">MR</div><span class="font-semi" style="color:var(--white)">Mei Rodriguez</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">mei@fintech.sg</td><td class="text-mute">COO</td><td style="color:var(--white-soft)">FinTech SG</td><td><span class="tag muted">Inactive</span></td><td><span class="tag red">Churned</span></td><td class="font-mono text-dim" style="font-size:0.7rem">1 week ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#1e3a5f,#1e40af)">LM</div><span class="font-semi" style="color:var(--white)">Luca Moretti</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">luca@ventures.it</td><td class="text-mute">Investor</td><td style="color:var(--white-soft)">Ventures IT</td><td><span class="tag green">Active</span></td><td><span class="tag pink">Partner</span></td><td class="font-mono text-dim" style="font-size:0.7rem">4h ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#831843,#9d174d)">YT</div><span class="font-semi" style="color:var(--white)">Yuki Tanaka</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">yuki@saas.jp</td><td class="text-mute">VP Sales</td><td style="color:var(--white-soft)">SaaS Japan</td><td><span class="tag green">Active</span></td><td><span class="tag green">Client</span></td><td class="font-mono text-dim" style="font-size:0.7rem">Yesterday</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#0f4c5c,#0e7490)">FA</div><span class="font-semi" style="color:var(--white)">Fatima Al-Amin</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">fatima@corp.ae</td><td class="text-mute">Director</td><td style="color:var(--white-soft)">Corp AE</td><td><span class="tag amber">Prospect</span></td><td><span class="tag purple">Lead</span></td><td class="font-mono text-dim" style="font-size:0.7rem">2 days ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#7c2d12,#9a3412)">CM</div><span class="font-semi" style="color:var(--white)">Carlos Mendez</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">carlos@media.mx</td><td class="text-mute">CMO</td><td style="color:var(--white-soft)">Media MX</td><td><span class="tag green">Active</span></td><td><span class="tag green">Client</span></td><td class="font-mono text-dim" style="font-size:0.7rem">6h ago</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#164e63,#0e7490)">PS</div><span class="font-semi" style="color:var(--white)">Priya Sharma</span></div></td><td class="font-mono text-dim" style="font-size:0.7rem">priya@tech.in</td><td class="text-mute">Engineering Lead</td><td style="color:var(--white-soft)">Tech India</td><td><span class="tag green">Active</span></td><td><span class="tag pink">Partner</span></td><td class="font-mono text-dim" style="font-size:0.7rem">3h ago</td><td><button class="btn-ghost">View</button></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pagination-info">Showing 10 of 10 contacts</span>
+            <div class="page-btns">
+              <button class="page-btn">←</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ COMPANIES ══════════════════════════════════════════════ -->
+      <div class="page" id="page-companies">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Companies</div>
+            <div class="page-sub">8 organisations</div>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn-ghost">Export CSV</button>
+            <button class="btn-primary">+ Add Company</button>
+          </div>
+        </div>
+        <div class="flex items-center mb-1" style="justify-content:space-between">
+          <div class="pill-row">
+            <span class="pill active">All</span>
+            <span class="pill">Client</span>
+            <span class="pill">Lead</span>
+            <span class="pill">Prospect</span>
+            <span class="pill">Partner</span>
+            <span class="pill">Churned</span>
+          </div>
+          <div class="search-wrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(245,243,255,0.35)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search companies..."/></div>
+        </div>
+        <div class="panel">
+          <table>
+            <thead>
+              <tr><th>Company</th><th>Industry</th><th>Size</th><th>Contacts</th><th>Pipeline Value</th><th>Status</th><th>Location</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#581c87,#7c3aed)">TC</div><span class="font-semi" style="color:var(--white)">TechCorp</span></div></td><td class="text-mute">Technology</td><td class="font-mono text-dim" style="font-size:0.7rem">500–1000</td><td style="text-align:center">12</td><td class="font-semi text-purple font-mono">$48,000</td><td><span class="tag green">Client</span></td><td>🇬🇭</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#2e1065,#4c1d95)">SC</div><span class="font-semi" style="color:var(--white)">StartupCo</span></div></td><td class="text-mute">SaaS</td><td class="font-mono text-dim" style="font-size:0.7rem">10–50</td><td style="text-align:center">4</td><td class="font-semi text-purple font-mono">$12,000</td><td><span class="tag purple">Lead</span></td><td>🇺🇸</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#064e3b,#065f46)">AE</div><span class="font-semi" style="color:var(--white)">Agency EU</span></div></td><td class="text-mute">Design</td><td class="font-mono text-dim" style="font-size:0.7rem">50–200</td><td style="text-align:center">7</td><td class="font-semi text-purple font-mono">$24,000</td><td><span class="tag green">Client</span></td><td>🇩🇪</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#7f1d1d,#991b1b)">FS</div><span class="font-semi" style="color:var(--white)">FinTech SG</span></div></td><td class="text-mute">Finance</td><td class="font-mono text-dim" style="font-size:0.7rem">200–500</td><td style="text-align:center">9</td><td class="font-semi font-mono" style="color:#f87171">$0</td><td><span class="tag red">Churned</span></td><td>🇸🇬</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#1e3a5f,#1e40af)">VI</div><span class="font-semi" style="color:var(--white)">Ventures IT</span></div></td><td class="text-mute">Investment</td><td class="font-mono text-dim" style="font-size:0.7rem">1–10</td><td style="text-align:center">2</td><td class="font-semi text-purple font-mono">$80,000</td><td><span class="tag pink">Partner</span></td><td>🇮🇹</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#831843,#9d174d)">SJ</div><span class="font-semi" style="color:var(--white)">SaaS Japan</span></div></td><td class="text-mute">Technology</td><td class="font-mono text-dim" style="font-size:0.7rem">100–200</td><td style="text-align:center">6</td><td class="font-semi text-purple font-mono">$36,000</td><td><span class="tag green">Client</span></td><td>🇯🇵</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#0f4c5c,#0e7490)">CA</div><span class="font-semi" style="color:var(--white)">Corp AE</span></div></td><td class="text-mute">Enterprise</td><td class="font-mono text-dim" style="font-size:0.7rem">1000+</td><td style="text-align:center">15</td><td class="font-semi text-purple font-mono">$60,000</td><td><span class="tag amber">Prospect</span></td><td>🇦🇪</td><td><button class="btn-ghost">View</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="av" style="background:linear-gradient(135deg,#7c2d12,#9a3412)">MM</div><span class="font-semi" style="color:var(--white)">Media MX</span></div></td><td class="text-mute">Media</td><td class="font-mono text-dim" style="font-size:0.7rem">50–200</td><td style="text-align:center">5</td><td class="font-semi text-purple font-mono">$18,000</td><td><span class="tag green">Client</span></td><td>🇲🇽</td><td><button class="btn-ghost">View</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ TASKS ══════════════════════════════════════════════════ -->
+      <div class="page" id="page-tasks">
+        <div class="page-header">
+          <div>
+            <div class="page-title">Tasks</div>
+            <div class="page-sub">10 total · 3 in progress</div>
+          </div>
+          <button class="btn-primary">+ Add Task</button>
+        </div>
+
+        <!-- Task stat strip -->
+        <div class="panel mb-2">
+          <div class="stat-strip">
+            <div class="stat-item">
+              <div class="stat-label">Todo</div>
+              <div class="stat-value">5</div>
+              <div class="stat-change down">Needs action</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">In Progress</div>
+              <div class="stat-value">3</div>
+              <div class="stat-change up">Currently active</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">Completed</div>
+              <div class="stat-value">2</div>
+              <div class="stat-change up">Done this week</div>
+            </div>
+            <div class="stat-strip-divider"></div>
+            <div class="stat-item">
+              <div class="stat-label">Completion</div>
+              <div class="stat-value">20%</div>
+              <div class="stat-change up">Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center mb-1" style="gap:1.5rem">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-dim" style="font-size:0.65rem;letter-spacing:0.2em">STATUS</span>
+            <div class="pill-row">
+              <span class="pill active">All</span>
+              <span class="pill">Todo</span>
+              <span class="pill">In Progress</span>
+              <span class="pill">Done</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-dim" style="font-size:0.65rem;letter-spacing:0.2em">PRIORITY</span>
+            <div class="pill-row">
+              <span class="pill active">All</span>
+              <span class="pill">High</span>
+              <span class="pill">Medium</span>
+              <span class="pill">Low</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:32px"><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></th>
+                <th>Task</th><th>Category</th><th>Priority</th><th>Status</th><th>Due Date</th><th>Assignee</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Follow up with TechCorp</span></td><td><span class="tag muted">Follow-up</span></td><td><span class="tag red">High</span></td><td><span class="tag purple">In Progress</span></td><td class="font-mono text-pink" style="font-size:0.7rem">Today</td><td><div class="av" style="background:linear-gradient(135deg,#7c3aed,#c084fc);width:24px;height:24px;font-size:8px">CJ</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Send proposal to Corp AE</span></td><td><span class="tag muted">Sales</span></td><td><span class="tag red">High</span></td><td><span class="tag muted">Todo</span></td><td class="font-mono text-dim" style="font-size:0.7rem">Tomorrow</td><td><div class="av" style="background:linear-gradient(135deg,#7c3aed,#c084fc);width:24px;height:24px;font-size:8px">CJ</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Onboarding call — SaaS Japan</span></td><td><span class="tag muted">Onboarding</span></td><td><span class="tag amber">Medium</span></td><td><span class="tag purple">In Progress</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 15</td><td><div class="av" style="background:linear-gradient(135deg,#831843,#9d174d);width:24px;height:24px;font-size:8px">YT</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Update contact info — Agency EU</span></td><td><span class="tag muted">Admin</span></td><td><span class="tag muted">Low</span></td><td><span class="tag muted">Todo</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 16</td><td><div class="av" style="background:linear-gradient(135deg,#064e3b,#065f46);width:24px;height:24px;font-size:8px">SP</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Renewal discussion — Ventures</span></td><td><span class="tag muted">Sales</span></td><td><span class="tag red">High</span></td><td><span class="tag muted">Todo</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 14</td><td><div class="av" style="background:linear-gradient(135deg,#1e3a5f,#1e40af);width:24px;height:24px;font-size:8px">LM</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Demo prep for Media MX</span></td><td><span class="tag muted">Pre-sales</span></td><td><span class="tag amber">Medium</span></td><td><span class="tag green">Done</span></td><td class="font-mono text-dim" style="font-size:0.7rem">Completed</td><td><div class="av" style="background:linear-gradient(135deg,#7c2d12,#9a3412);width:24px;height:24px;font-size:8px">CM</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Contract review — FinTech SG</span></td><td><span class="tag muted">Legal</span></td><td><span class="tag muted">Low</span></td><td><span class="tag green">Done</span></td><td class="font-mono text-dim" style="font-size:0.7rem">Completed</td><td><div class="av" style="background:linear-gradient(135deg,#7f1d1d,#991b1b);width:24px;height:24px;font-size:8px">MR</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Quarterly review deck</span></td><td><span class="tag muted">Admin</span></td><td><span class="tag amber">Medium</span></td><td><span class="tag purple">In Progress</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 20</td><td><div class="av" style="background:linear-gradient(135deg,#7c3aed,#c084fc);width:24px;height:24px;font-size:8px">CJ</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Check in with Priya Sharma</span></td><td><span class="tag muted">Follow-up</span></td><td><span class="tag muted">Low</span></td><td><span class="tag muted">Todo</span></td><td class="font-mono text-dim" style="font-size:0.7rem">May 17</td><td><div class="av" style="background:linear-gradient(135deg,#164e63,#0e7490);width:24px;height:24px;font-size:8px">PS</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+              <tr><td><input type="checkbox" style="accent-color:var(--purple);width:12px;height:12px"/></td><td class="font-semi" style="color:var(--white-soft);max-width:220px"><span class="truncate" style="display:block">Invoice StartupCo</span></td><td><span class="tag muted">Finance</span></td><td><span class="tag red">High</span></td><td><span class="tag muted">Todo</span></td><td class="font-mono text-pink" style="font-size:0.7rem">Today</td><td><div class="av" style="background:linear-gradient(135deg,#2e1065,#4c1d95);width:24px;height:24px;font-size:8px">JL</div></td><td><button class="btn-ghost">Edit</button></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <span class="pagination-info">Showing 10 of 10 tasks</span>
+            <div class="page-btns">
+              <button class="page-btn">←</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SETTINGS ══════════════════════════════════════════════ -->
+      <div class="page" id="page-settings">
+        <div class="page-header">
+          <div class="page-title">Settings</div>
+        </div>
+        <div class="settings-grid">
+          <!-- Profile -->
+          <div class="panel">
+            <div class="panel-header"><div class="panel-title">Profile Information</div></div>
+            <div style="padding:1.25rem">
+              <div class="settings-form-field"><label>Full Name</label><input value="Chinyere John-Nnah"/></div>
+              <div class="settings-form-field"><label>Email Address</label><input value="chinyere@nexuscrm.io"/></div>
+              <div class="settings-form-field"><label>Job Title</label><input value="CRM Administrator"/></div>
+              <div class="settings-form-field"><label>Company</label><input value="NexusCRM"/></div>
+              <div class="settings-form-field"><label>Timezone</label><input value="Africa/Lagos (UTC+1)"/></div>
+              <button class="btn-primary" style="margin-top:0.5rem">Save Profile</button>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <!-- Notifications -->
+            <div class="panel">
+              <div class="panel-header"><div class="panel-title">Notifications</div></div>
+              <div style="padding:0.75rem 1.25rem">
+                <div class="toggle-row">
+                  <div><div class="toggle-label">Email Alerts</div><div class="toggle-sub">New contacts, tasks, and assignments</div></div>
+                  <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="toggle-row">
+                  <div><div class="toggle-label">Task Reminders</div><div class="toggle-sub">Alerts before due dates</div></div>
+                  <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="toggle-row">
+                  <div><div class="toggle-label">Weekly Digest</div><div class="toggle-sub">CRM summary every Monday</div></div>
+                  <div class="toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="toggle-row">
+                  <div><div class="toggle-label">SMS Alerts</div><div class="toggle-sub">Critical updates via SMS</div></div>
+                  <div class="toggle" onclick="this.classList.toggle('on')"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Data management -->
+            <div class="panel">
+              <div class="panel-header"><div class="panel-title">Data Management</div></div>
+              <div style="padding:0.75rem 1.25rem;display:flex;flex-direction:column;gap:0.5rem">
+                <button class="btn-ghost" style="width:100%;justify-content:center">Export Contacts (CSV)</button>
+                <button class="btn-ghost" style="width:100%;justify-content:center">Export Companies (CSV)</button>
+                <button class="btn-ghost" style="width:100%;justify-content:center">Export Tasks (CSV)</button>
+                <button class="btn-ghost" style="width:100%;justify-content:center;color:#f87171;border-color:rgba(239,68,68,0.25)">Delete All Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+  // Set today's date in overview header
+  document.getElementById('overviewDate').textContent =
+    new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  const titles = {
+    overview:  { title:'Overview',  sub:'Today\'s summary' },
+    contacts:  { title:'Contacts',  sub:'All records' },
+    companies: { title:'Companies', sub:'All organisations' },
+    tasks:     { title:'Tasks',     sub:'All tasks' },
+    settings:  { title:'Settings',  sub:'Manage your account' },
+  };
+
+  function showPage(id, navEl) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Remove active from all nav items
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    // Show target page
+    document.getElementById('page-' + id).classList.add('active');
+    // Mark nav item active
+    if (navEl) navEl.classList.add('active');
+    // Update topbar
+    const t = titles[id];
+    document.getElementById('topbarTitle').innerHTML =
+      t.title + ' <span>' + t.sub + '</span>';
+  }
+</script>
+</body>
+</html>
