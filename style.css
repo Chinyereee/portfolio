@@ -8,13 +8,13 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --purple:        #a855f7;
-  --purple-bright: #c084fc;
-  --purple-soft:   #7c3aed;
-  --purple-dim:    rgba(168,85,247,0.10);
-  --purple-border: rgba(168,85,247,0.22);
-  --pink:          #f472b6;
-  --pink-bright:   #f9a8d4;
+  --gold-orange:   #b45309;
+  --purple-bright: #fbbf6d;
+  --purple-soft:   #92400e;
+  --purple-dim:    rgba(217, 119, 6, 0.10);
+  --purple-border: rgba(255, 255, 255, 0.18);
+  --pink:          #d97706;
+  --pink-bright:   #fde68a;
   --white:         #f5f3ff;
   --white-soft:    rgba(245,243,255,0.78);
   --white-mute:    rgba(245,243,255,0.55);
