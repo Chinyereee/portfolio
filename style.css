@@ -44,8 +44,8 @@ body::before {
   content: '';
   position: fixed; inset: 0;
   background-image:
-    linear-gradient(rgba(168,85,247,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168,85,247,0.018) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 64px 64px;
   pointer-events: none;
   z-index: 0;
@@ -61,21 +61,21 @@ body::before {
 }
 .blob-1 {
   width: 600px; height: 600px;
-  background: rgba(80,20,200,0.6);
+  background: rgba(255, 255, 255, 0.10);
   top: -120px; right: -120px;
   filter: blur(60px);
   animation: drift1 16s ease-in-out infinite;
 }
 .blob-2 {
   width: 500px; height: 500px;
-  background: rgba(180,40,140,0.45);
+  background: rgba(217, 119, 6, 0.38);
   bottom: -120px; left: -120px;
   filter: blur(70px);
   animation: drift2 18s ease-in-out infinite;
 }
 .blob-3 {
   width: 300px; height: 300px;
-  background: rgba(60,10,180,0.5);
+  background: rgba(255, 255, 255, 0.07);
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   filter: blur(50px);
@@ -583,9 +583,10 @@ nav {
 
 .proj-card:hover {
   transform: translateY(-6px);
-  background: rgba(0,0,0,0.35);
-  border-top-color: rgba(255,255,255,0.5);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.12);
+  background: rgba(217, 119, 6, 0.07);
+  border-color: rgba(217, 119, 6, 0.35);
+  border-top-color: rgba(251, 191, 109, 0.6);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 30px rgba(217, 119, 6, 0.15), 0 0 0 0.5px rgba(217, 119, 6, 0.2);
 }
 .proj-card:hover .proj-thumb-num {
   transform: translate(-4px, -2px);
