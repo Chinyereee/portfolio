@@ -9,19 +9,19 @@
 
 :root {
   --gold-orange:   #b45309;
-  --purple-bright: #fbbf6d;
-  --purple-soft:   #92400e;
-  --purple-dim:    rgba(217, 119, 6, 0.10);
-  --purple-border: rgba(255, 255, 255, 0.18);
-  --pink:          #d97706;
-  --pink-bright:   #fde68a;
-  --white:         #f5f3ff;
-  --white-soft:    rgba(245,243,255,0.78);
+  --gold-bright: #fbbf6d;
+  --gold-soft:   #92400e;
+  --gold-dim:    rgba(131, 81, 23, 0.1);
+  --grey-border: rgba(255, 255, 255, 0.18);
+  --gold:          #d97706;
+  --gold-bright:   #d3a24d;
+  --white:         #ffffff;
+  --white-soft:    rgba(234, 230, 245, 0.78);
   --white-mute:    rgba(245,243,255,0.55);
   --white-dim:     rgba(245,243,255,0.35);
-  --dark:          #060410;
-  --dark-2:        #0d0820;
-  --dark-3:        #140c28;
+  --dark:          #463314;
+  --dark-2:        #33220e;
+  --dark-3:        #080502;
   --easing:        cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -31,7 +31,7 @@ section.page { scroll-margin-top: 80px; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #060410;
+  background: #000000;
   color: var(--white);
   min-height: 100vh;
   overflow-x: hidden;
@@ -129,12 +129,12 @@ nav {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--purple-bright), var(--pink));
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold));
   transform-origin: left;
   transform: scaleX(0);
   transition: transform 0.35s var(--easing);
 }
-.nav-logo:hover { color: var(--purple-bright); }
+.nav-logo:hover { color: var(--gold-bright); }
 .nav-logo:hover::after { transform: scaleX(1); }
 
 .nav-links {
@@ -158,7 +158,7 @@ nav {
   position: absolute;
   left: 0; right: 0; bottom: -2px;
   height: 1.5px;
-  background: linear-gradient(90deg, var(--purple-bright), var(--pink));
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold));
   transform-origin: left;
   transform: scaleX(0);
   transition: transform 0.3s var(--easing);
@@ -199,7 +199,7 @@ nav {
   font-weight: 500;
   letter-spacing: 0.5em;
   text-transform: uppercase;
-  color: var(--pink);
+  color: var(--gold);
   margin-bottom: 2rem;
   position: relative;
   display: inline-block;
@@ -211,7 +211,7 @@ nav {
   top: 50%;
   width: 32px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--pink));
+  background: linear-gradient(90deg, transparent, var(--gold));
 }
 .hero-hello::before { right: calc(100% + 18px); transform: scaleX(-1); }
 .hero-hello::after  { left: calc(100% + 18px); }
@@ -231,7 +231,7 @@ nav {
 }
 .hero-name .last {
   display: block;
-  background: linear-gradient(135deg, var(--purple-bright) 0%, var(--pink) 100%);
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -245,10 +245,10 @@ nav {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--purple-bright);
+  color: var(--gold-bright);
   margin-top: 1.5rem;
   margin-bottom: 0;
-  text-shadow: 0 0 20px rgba(192,132,252,0.35);
+  text-shadow: 0 0 20px rgba(252, 236, 132, 0.35);
 }
 
 .home-intro {
@@ -258,7 +258,7 @@ nav {
   align-items: center;
   width: 100%;
   text-align: center;
-  background: linear-gradient(180deg, rgba(6,4,16,0) 0%, rgba(6,4,16,0.6) 100%);
+  background: linear-gradient(180deg, rgba(55, 39, 12, 0) 0%, rgba(6,4,16,0.6) 100%);
 }
 .home-intro-left { text-align: center; }
 
@@ -304,7 +304,7 @@ nav {
   font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--pink);
+  color: var(--gold);
   margin-bottom: 1rem;
   display: inline-flex;
   align-items: center;
@@ -315,8 +315,8 @@ nav {
   display: inline-block;
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--pink);
-  box-shadow: 0 0 10px var(--pink);
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold);
   animation: pulse 2.4s ease-in-out infinite;
 }
 @keyframes pulse {
@@ -336,7 +336,7 @@ nav {
 .page-heading em {
   font-style: italic;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--purple-bright), var(--pink));
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -383,7 +383,7 @@ nav {
   font-size: 0.65rem; letter-spacing: 0.35em;
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--purple-bright);
+  color: var(--gold-bright);
   margin-bottom: 1.5rem;
   position: relative; z-index: 1;
 }
@@ -425,7 +425,7 @@ nav {
   font-size: 0.7rem; letter-spacing: 0.3em;
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--purple-bright);
+  color: var(--gold-bright);
   margin-bottom: 2rem;
   position: relative; z-index: 1;
 }
@@ -443,14 +443,14 @@ nav {
   position: absolute; left: 0; top: 7px;
   width: 9px; height: 9px;
   border-radius: 50%;
-  background: var(--purple-bright);
-  box-shadow: 0 0 12px rgba(192,132,252,0.8), 0 0 0 3px rgba(168,85,247,0.15);
+  background: var(--gold-bright);
+  box-shadow: 0 0 12px rgb(230, 154, 66), 0 0 0 3px rgba(168,85,247,0.15);
 }
 .tl-entry::after {
   content: '';
   position: absolute;
   left: 4px; top: 22px; bottom: -22px; width: 1px;
-  background: linear-gradient(to bottom, rgba(168,85,247,0.25), transparent);
+  background: linear-gradient(to bottom, rgba(233, 163, 77, 0.888), transparent);
 }
 .tl-entry:last-child::after { display: none; }
 .tl-date {
@@ -459,7 +459,7 @@ nav {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--pink);
+  color: var(--gold);
   margin-bottom: 0.4rem;
 }
 .tl-title {
@@ -501,19 +501,19 @@ nav {
   transform: translateY(-50%);
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: var(--purple-bright);
+  background: var(--gold-bright);
   color: var(--dark);
   display: flex; align-items: center; justify-content: center;
   font-weight: 700;
   font-size: 0.85rem;
-  box-shadow: 0 0 0 4px var(--dark), 0 0 16px rgba(192,132,252,0.5);
+  box-shadow: 0 0 0 4px var(--dark), 0 0 16px rgba(201, 123, 46, 0.902);
 }
 .currently-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--pink-bright);
+  color: var(--gold-bright);
   margin-bottom: 1rem;
   display: inline-block;
 }
@@ -624,7 +624,7 @@ nav {
   font-family: 'Syne', sans-serif;
   font-size: 2rem;
   font-weight: 800;
-  color: rgba(255,255,255,0.06);
+  color: rgba(193, 118, 56, 0.872);
   position: relative; z-index: 1;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -643,7 +643,7 @@ nav {
   font-size: 0.62rem; letter-spacing: 0.25em;
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--purple-bright);
+  color: var(--gold-bright);
   opacity: 0.85;
   margin-bottom: 0.75rem;
   display: inline-flex;
@@ -654,8 +654,8 @@ nav {
   content: '';
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--pink);
-  box-shadow: 0 0 8px var(--pink);
+  background: var(--gold-bright);
+  box-shadow: 0 0 8px var(--gold-bright);
 }
 .proj-name {
   font-family: 'Syne', sans-serif;
@@ -696,7 +696,7 @@ nav {
   font-family: 'Inter', sans-serif;
   font-size: 0.78rem; font-weight: 600;
   letter-spacing: 0.05em;
-  color: var(--purple-bright);
+  color: var(--gold-bright);
   cursor: pointer;
   text-decoration: none;
   padding: 0.45rem 1rem;

@@ -15,7 +15,7 @@ function resizeSC() {
 resizeSC();
 window.addEventListener('resize', resizeSC);
 
-const SPARK_COLORS = ['#febe65', '#d97706', '#633807', '#946f3b',];
+const SPARK_COLORS = ['#e8b772', '#d97706', '#633807', '#946f3b',];
 
 const sparks = Array.from({ length: 120 }, () => ({
   x:       rnd(0, sc.width),
