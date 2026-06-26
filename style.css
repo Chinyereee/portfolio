@@ -8,13 +8,13 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --purple:   #5d04a6;
-  --purple-bright: #aa61f2;
-  --purple-soft:   #6a3eb7b0;
-  --purple-dim:    rgba(87, 37, 134, 0.38);
-  --purple-border: rgba(83, 42, 121, 0.35);
-  --pink:          #f90181;
-  --pink-bright:   #d15e99;
+  --purple:   #490588;
+  --purple-bright: #c084fc;
+  --purple-soft:   #7c3aed;
+  --purple-dim:    rgba(168, 85, 247, 0.10);
+  --purple-border: rgba(168, 85, 247, 0.22);
+  --pink:          #f472b6;
+  --pink-bright:   #f9a8d4;
   --white:         #ffffff;
   --white-soft:    rgba(234, 230, 245, 0.78);
   --white-mute:    rgba(245,243,255,0.55);
@@ -68,14 +68,14 @@ body::before {
 }
 .blob-2 {
   width: 500px; height: 500px;
-  background: rgba(180, 40, 140, 0.45);
+  background: rgba(60, 10, 180, 0.5);
   bottom: -120px; left: -120px;
   filter: blur(70px);
   animation: drift2 18s ease-in-out infinite;
 }
 .blob-3 {
   width: 300px; height: 300px;
-  background: rgba(60, 10, 180, 0.5);
+  background: rgba(180, 40, 140, 0.45);
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   filter: blur(50px);
