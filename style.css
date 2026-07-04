@@ -1001,3 +1001,69 @@ nav {
   .hero-btns { gap: 0.75rem; }
   .hero-btn-primary, .hero-btn-secondary { width: 100%; text-align: center; justify-content: center; }
 }
+
+/* ── SPLIT TWO-COLUMN HERO GRID LAYOUT ── */
+.home-layout-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 2rem 4rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .home-layout-container {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 4rem;
+    padding: 160px 3rem 6rem;
+  }
+  .home-hero {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 2rem 0 0 0 !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+  .hero-name, .hero-sub, .hero-btns {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    margin-left: 0 !important;
+  }
+  .home-dashboard {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ── SKILLS LIMIT FILTER (Shows top 4 badges initially) ── */
+.dash-skills-grid .dash-skill:nth-child(n+5) {
+  display: none;
+}
+.dash-skills-grid.show-all .dash-skill:nth-child(n+5) {
+  display: inline-block;
+}
+
+/* ── SCROLLABLE WINDOW FOR PROJECTS (Lined up to show exactly 3) ── */
+.scrollable-project-window {
+  max-height: 226px; /* Dynamically cuts off perfect at the edge of card 3 */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+/* Custom scrollbar handling for Webkit browsers */
+.scrollable-project-window::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollable-project-window::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollable-project-window::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+.scrollable-project-window::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-bright);
+}
