@@ -31,97 +31,131 @@
 
     <canvas id="sparkleCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
-    <div class="home-hero" style="position:relative;z-index:1;">
-      <div class="hero-badge">Frontend Developer <span class="hero-badge-dot">•</span> Web3 Enthusiast</div>
-      <div class="hero-name">
-        <span class="first">I build modern,</span>
-        <span class="last">scalable &amp; impactful</span>
-        <span class="first" style="margin-top:0.1em;">web experiences.</span>
+    <div class="home-layout">
+
+      <!-- LEFT: Hero text -->
+      <div class="home-left">
+        <div class="hero-badge">Frontend Developer <span class="hero-badge-dot">•</span> Web3 Enthusiast</div>
+        <div class="hero-name">
+          <span class="first">I build modern,</span>
+          <span class="last">scalable &amp; impactful</span>
+          <span class="first" style="margin-top:0.1em;">web experiences.</span>
+        </div>
+        <p class="hero-sub">A Frontend Developer passionate about building intuitive interfaces and Web3 products that solve real-world problems.</p>
+        <div class="hero-skill-pills">
+          <span class="hero-pill">⚛ React</span>
+          <span class="hero-pill">N Next.js</span>
+          <span class="hero-pill">TS TypeScript</span>
+          <span class="hero-pill">🌬 Tailwind CSS</span>
+          <span class="hero-pill">⟠ Ethers.js</span>
+        </div>
+        <div class="hero-btns">
+          <a href="#projects" class="hero-btn-primary">View My Work →</a>
+          <a href="Chinyere_John-Nnah_CV_v2.pdf" download class="hero-btn-secondary">Download Resume ↓</a>
+        </div>
+        <div class="hero-social-row">
+          <a href="https://www.linkedin.com/in/chinyere-john-nnah" target="_blank" rel="noopener noreferrer" class="hero-social">in</a>
+          <a href="mailto:chinyerejohnnna@gmail.com" class="hero-social">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          </a>
+          <a href="https://github.com/Chinyereee" target="_blank" rel="noopener noreferrer" class="hero-social">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+        </div>
       </div>
-      <p class="hero-sub">A Frontend Developer passionate about building intuitive interfaces and Web3 products that solve real-world problems.</p>
-      <div class="hero-skill-pills">
-        <span class="hero-pill">⚛ React</span>
-        <span class="hero-pill">N Next.js</span>
-        <span class="hero-pill">TS TypeScript</span>
-        <span class="hero-pill">🌬 Tailwind CSS</span>
-        <span class="hero-pill">⟠ Ethers.js</span>
-      </div>
-      <div class="hero-btns">
-        <a href="#projects" class="hero-btn-primary">View My Work →</a>
-        <a href="https://github.com/Chinyereee" target="_blank" rel="noopener noreferrer" class="hero-btn-secondary">Download Resume ↓</a>
+
+      <!-- RIGHT: Dashboard cards -->
+      <div class="home-right">
+
+        <!-- Skills card -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-dot"></span>
+            <span class="dash-card-title">Skills</span>
+            <button class="dash-card-link" id="skillsToggle" onclick="toggleSkills()">View all</button>
+          </div>
+          <div class="dash-skills-grid">
+            <span class="dash-skill">⚛ React</span>
+            <span class="dash-skill">N Next.js</span>
+            <span class="dash-skill">TS TypeScript</span>
+            <span class="dash-skill">🌬 Tailwind CSS</span>
+            <!-- hidden by default -->
+            <span class="dash-skill dash-skill-extra" style="display:none;">⟠ Ethers.js</span>
+            <span class="dash-skill dash-skill-extra" style="display:none;">◈ Git</span>
+            <span class="dash-skill dash-skill-extra" style="display:none;">JS JavaScript</span>
+            <span class="dash-skill dash-skill-extra" style="display:none;">🔷 shadcn/ui</span>
+            <span class="dash-skill dash-skill-extra" style="display:none;">📊 Recharts</span>
+            <span class="dash-skill dash-skill-extra" style="display:none;">🔗 REST APIs</span>
+          </div>
+        </div>
+
+        <!-- Featured Projects card -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <span class="dash-card-dot"></span>
+            <span class="dash-card-title">Featured Projects</span>
+            <a href="#projects" class="dash-card-link">View all →</a>
+          </div>
+          <div class="dash-projects" id="dashProjects">
+
+            <a href="https://gas-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
+              <div class="dash-proj-icon">⛽</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">Gas Tracker Dashboard</p>
+                <p class="dash-proj-desc">Real-time Ethereum gas tracker with historical chart.</p>
+              </div>
+              <span class="dash-proj-arrow">↗</span>
+            </a>
+
+            <a href="https://ai-summarizer-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
+              <div class="dash-proj-icon">✦</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">AI Article Summarizer</p>
+                <p class="dash-proj-desc">URL to clean summary powered by Groq + Llama 3.</p>
+              </div>
+              <span class="dash-proj-arrow">↗</span>
+            </a>
+
+            <a href="https://defi-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
+              <div class="dash-proj-icon">◈</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">DeFi Portfolio Tracker</p>
+                <p class="dash-proj-desc">Multi-chain wallet viewer across Ethereum, Polygon, Base.</p>
+              </div>
+              <span class="dash-proj-arrow">↗</span>
+            </a>
+
+            <!-- scrollable extras -->
+            <a href="https://saas-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj dash-proj-extra">
+              <div class="dash-proj-icon">▦</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">SaaS Dashboard</p>
+                <p class="dash-proj-desc">Analytics dashboard with revenue charts and live data.</p>
+              </div>
+              <span class="dash-proj-arrow">↗</span>
+            </a>
+
+            <a href="https://crm-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj dash-proj-extra">
+              <div class="dash-proj-icon">👥</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">CRM Dashboard</p>
+                <p class="dash-proj-desc">Full CRM with contacts, tasks, and deal pipeline.</p>
+              </div>
+              <span class="dash-proj-arrow">↗</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- View CV link -->
+        <a href="Chinyere_John-Nnah_CV_v2.pdf" target="_blank" rel="noopener noreferrer" class="dash-cv-btn">
+          View Full CV →
+        </a>
+
       </div>
     </div>
 
-    <div class="home-dashboard">
-
-      <!-- Skills card -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <span class="dash-card-dot"></span>
-          <span class="dash-card-title">Skills</span>
-          <a href="#about" class="dash-card-link">View all</a>
-        </div>
-        <div class="dash-skills-grid">
-          <span class="dash-skill">⚛ React</span>
-          <span class="dash-skill">N Next.js</span>
-          <span class="dash-skill">TS TypeScript</span>
-          <span class="dash-skill">🌬 Tailwind CSS</span>
-          <span class="dash-skill">⟠ Ethers.js</span>
-          <span class="dash-skill">◈ Git</span>
-          <span class="dash-skill">JS JavaScript</span>
-          <span class="dash-skill">🔷 shadcn/ui</span>
-        </div>
-      </div>
-
-      <!-- Featured Projects card -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <span class="dash-card-dot"></span>
-          <span class="dash-card-title">Featured Projects</span>
-          <a href="#projects" class="dash-card-link">View all →</a>
-        </div>
-        <div class="dash-projects">
-
-          <a href="https://gas-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
-            <div class="dash-proj-icon">⛽</div>
-            <div class="dash-proj-info">
-              <p class="dash-proj-name">Gas Tracker Dashboard</p>
-              <p class="dash-proj-desc">Real-time Ethereum gas tracker with historical chart.</p>
-            </div>
-            <span class="dash-proj-arrow">↗</span>
-          </a>
-
-          <a href="https://ai-summarizer-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
-            <div class="dash-proj-icon">✦</div>
-            <div class="dash-proj-info">
-              <p class="dash-proj-name">AI Article Summarizer</p>
-              <p class="dash-proj-desc">URL to clean summary powered by Groq + Llama 3.</p>
-            </div>
-            <span class="dash-proj-arrow">↗</span>
-          </a>
-
-          <a href="https://defi-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
-            <div class="dash-proj-icon">◈</div>
-            <div class="dash-proj-info">
-              <p class="dash-proj-name">DeFi Portfolio Tracker</p>
-              <p class="dash-proj-desc">Multi-chain wallet viewer across Ethereum, Polygon, Base.</p>
-            </div>
-            <span class="dash-proj-arrow">↗</span>
-          </a>
-
-          <a href="https://saas-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
-            <div class="dash-proj-icon">▦</div>
-            <div class="dash-proj-info">
-              <p class="dash-proj-name">SaaS Dashboard</p>
-              <p class="dash-proj-desc">Analytics dashboard with revenue charts and live data.</p>
-            </div>
-            <span class="dash-proj-arrow">↗</span>
-          </a>
-
-        </div>
-      </div>
-
-    </div>
+  </section>
 
   <!-- ══════════════════════════════════
        ABOUT
@@ -390,6 +424,18 @@
   <!-- Scripts: nav.js is shared, sparkles.js only loads on home -->
   <script src="nav.js"></script>
   <script src="sparkles.js"></script>
+
+  <script>
+    function toggleSkills() {
+      var extras = document.querySelectorAll('.dash-skill-extra');
+      var btn = document.getElementById('skillsToggle');
+      var allHidden = extras[0].style.display === 'none';
+      extras.forEach(function(el) {
+        el.style.display = allHidden ? 'inline-flex' : 'none';
+      });
+      btn.textContent = allHidden ? 'Show less' : 'View all';
+    }
+  </script>
 
 </body>
 </html>
