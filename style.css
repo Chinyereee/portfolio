@@ -1208,50 +1208,6 @@ nav {
   color: var(--purple-bright);
 }
 
-.hero-btns {
-  display: flex;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.75rem;
-}
-.hero-btn-primary {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, var(--purple-soft), var(--purple-bright));
-  border-radius: 8px;
-  padding: 0.7rem 1.5rem;
-  text-decoration: none;
-  transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(168,85,247,0.3);
-  white-space: nowrap;
-}
-.hero-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(168,85,247,0.45);
-}
-.hero-btn-secondary {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: rgba(245,243,255,0.78);
-  background: rgba(0,0,0,0.3);
-  border: 0.5px solid rgba(255,255,255,0.2);
-  border-top: 1px solid rgba(255,255,255,0.35);
-  border-radius: 8px;
-  padding: 0.7rem 1.5rem;
-  text-decoration: none;
-  backdrop-filter: blur(20px);
-  transition: all 0.3s;
-  white-space: nowrap;
-}
-.hero-btn-secondary:hover {
-  border-color: var(--purple-bright);
-  color: var(--purple-bright);
-  transform: translateY(-2px);
-}
-
 .hero-social-row {
   display: flex;
   gap: 0.6rem;
