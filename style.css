@@ -1027,7 +1027,7 @@ nav {
     text-align: left !important;
     align-items: flex-start !important;
   }
-  .hero-name, .hero-sub, .hero-btns {
+  .hero-name, .hero-sub {
     text-align: left !important;
     justify-content: flex-start !important;
     margin-left: 0 !important;
@@ -1093,7 +1093,7 @@ nav {
     text-align: left !important;
     align-items: flex-start !important;
   }
-  .hero-name, .hero-sub, .hero-btns {
+  .hero-name, .hero-sub {
     text-align: left !important;
     justify-content: flex-start !important;
     margin-left: 0 !important;
@@ -1441,8 +1441,8 @@ nav {
 }
 
 .hero-bottom {
-  margin-top: auto;
   grid-column: 1 / -1;
+  margin-top: auto;
   padding-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -1451,7 +1451,28 @@ nav {
   width: 100%;
 }
 
+/* CTA row: 3-track grid so the middle button lands dead-centre between
+   the left writeup and the right cards, regardless of the side buttons' widths */
+.hero-bottom .hero-btns {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+}
+.hero-bottom .hero-btns > :nth-child(1) { justify-self: end; }
+.hero-bottom .hero-btns > :nth-child(2) { justify-self: center; }
+.hero-bottom .hero-btns > :nth-child(3) { justify-self: start; }
+
 @media (max-width: 900px) {
   .home-left { min-height: unset; }
   .hero-bottom { margin-top: 2rem; align-items: center; }
+}
+
+/* Stack the CTAs once there isn't room for three across */
+@media (max-width: 640px) {
+  .hero-bottom .hero-btns { grid-template-columns: 1fr; }
+  .hero-bottom .hero-btns > :nth-child(1),
+  .hero-bottom .hero-btns > :nth-child(2),
+  .hero-bottom .hero-btns > :nth-child(3) { justify-self: stretch; }
 }
