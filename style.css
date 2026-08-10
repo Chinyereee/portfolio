@@ -3,11 +3,20 @@
    Theme: Dark Liquid Glass
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts are loaded with <link> tags in index.html <head> rather than @import
+   here — an @import can't begin downloading until this stylesheet has already
+   arrived, which serialises two round trips on a slow connection.
+   Dropped Fraunces and Space Grotesk: both were downloaded on every visit and
+   never referenced by a single rule. */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
+  /* Type */
+  --font-display: 'Syne', 'Inter', sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
   --purple:   #490588;
   --purple-bright: #c084fc;
   --purple-soft:   #7c3aed;
@@ -620,10 +629,10 @@ nav {
 
 /* Project number — barely-there */
 .proj-thumb-num {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 800;
-  color: rgba();
+  color: rgba(255, 255, 255, 0.06);
   position: relative; z-index: 1;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -1215,16 +1224,18 @@ nav {
   align-items: center;
 }
 .hero-social {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  /* 44px is the minimum comfortable touch target on a phone. The icons render
+     at 15px regardless — this only grows the tappable box around them. */
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   border: 0.5px solid rgba(255,255,255,0.16);
   background: rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(245,243,255,0.6);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.25s;
@@ -1235,6 +1246,21 @@ nav {
   color: var(--purple-bright);
   transform: translateY(-2px);
 }
+
+/* Email spelled out under the icon row */
+.hero-email {
+  display: block;
+  margin-top: 0.85rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  color: var(--white-mute);
+  text-decoration: none;
+  transition: color 0.25s var(--easing);
+  overflow-wrap: anywhere;
+}
+.hero-email:hover { color: var(--purple-bright); }
 
 /* ── RIGHT ── */
 .home-right {
@@ -1475,4 +1501,41 @@ nav {
   .hero-bottom .hero-btns > :nth-child(1),
   .hero-bottom .hero-btns > :nth-child(2),
   .hero-bottom .hero-btns > :nth-child(3) { justify-self: stretch; }
+}
+
+/* ── ACCESSIBILITY ───────────────────────────────────
+   Keyboard focus was completely invisible before this: there was no :focus
+   rule anywhere in the file, so tabbing through the page showed nothing.
+   :focus-visible targets keyboard users only — mouse clicks stay clean.  */
+:focus-visible {
+  outline: 2px solid var(--purple-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.proj-card:focus-visible,
+.dash-proj:focus-visible {
+  outline-offset: 6px;
+}
+
+/* Nav link matching the section currently on screen (set by nav.js) */
+.nav-link.active { color: var(--white); }
+.nav-link.active::after { transform: scaleX(1); }
+
+/* ── REDUCED MOTION ──────────────────────────────────
+   Three drifting blobs, five keyframe animations and a 120-particle canvas is
+   a lot of movement. Respect the OS-level "reduce motion" setting.
+   Last in the file so these win on cascade order.  */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep the blobs as static background colour rather than removing them —
+     they carry the look, it's only the drifting that's the problem. */
+  .blob { animation: none !important; }
 }

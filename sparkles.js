@@ -6,6 +6,10 @@
 const sc   = document.getElementById('sparkleCanvas');
 const sctx = sc.getContext('2d');
 
+// CSS can pause keyframe animations but not a requestAnimationFrame loop, so
+// reduced-motion has to be checked here too. Draw one static frame and stop.
+const stillMode = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function rnd(a, b) { return a + Math.random() * (b - a); }
 
 function resizeSC() {
@@ -69,6 +73,6 @@ function animateSparks() {
       ? drawStar(s.x, s.y, s.size,       s.color, op)
       : drawDot (s.x, s.y, s.size * 0.6, s.color, op);
   });
-  requestAnimationFrame(animateSparks);
+  if (!stillMode) requestAnimationFrame(animateSparks);
 }
 animateSparks();
