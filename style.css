@@ -84,6 +84,28 @@ body::before {
   mask-image: radial-gradient(ellipse at center top, black 20%, transparent 75%);
 }
 
+/* One slow ambient wash behind everything. Deliberately a single
+   element at 4.5%: at the gradient's hottest point it lifts the page
+   from #0a0a0b to rgb(18,15,22). That costs at most 0.77 of a ratio
+   (--text 18.00 -> 17.23, --accent 7.49 -> 7.17) and leaves the
+   binding case, --text-3, unchanged at 4.95. Everything still clears
+   AA. 48s is slow enough that it reads as depth rather than as
+   animation. z-index 0 keeps it below .page (1) and the nav (200).  */
+body::after {
+  content: '';
+  position: fixed; inset: -20%;
+  background: radial-gradient(ellipse 60% 50% at 50% 40%,
+                              rgba(192,132,252,0.045), transparent 70%);
+  animation: wash 48s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes wash {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(3%, -2%) scale(1.08); }
+}
+
 /* ── NAV ─────────────────────────────────────────── */
 nav {
   position: fixed;
@@ -158,11 +180,6 @@ nav {
 
 /* ── Page animations ─────────────────────────────── */
 .page { display: block; min-height: 100vh; position: relative; z-index: 1; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 /* ─────────────────────────────────────────
    HOME PAGE
 ───────────────────────────────────────── */
@@ -1594,9 +1611,10 @@ nav {
 }
 
 /* ── REDUCED MOTION ──────────────────────────────────
-   Respect the OS-level "reduce motion" setting. Nothing on this page loops
-   or drifts by itself, but fade-ups, hover lifts and the live-feed row
-   animation all still run, and any of those can trigger vestibular symptoms.
+   Respect the OS-level "reduce motion" setting. What actually runs:
+   the ambient wash on body::after, the two pulsing status dots, the
+   live-feed row fade-in, and hover transitions. The * rule below names
+   ::before and ::after explicitly, which is what catches the wash.
    Last in the file so these win on cascade order.  */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
