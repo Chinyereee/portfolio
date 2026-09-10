@@ -107,6 +107,15 @@
           </div>
           <div class="dash-projects" id="dashProjects">
 
+            <a href="https://github.com/Chinyereee/nova-ui" target="_blank" rel="noopener noreferrer" class="dash-proj">
+              <div class="dash-proj-icon">⬡</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">Nova UI</p>
+                <p class="dash-proj-desc">Accessible React component library, 142 tests in CI.</p>
+              </div>
+              <span class="dash-proj-arrow">↗</span>
+            </a>
+
             <a href="https://gas-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" class="dash-proj">
               <div class="dash-proj-icon">⛽</div>
               <div class="dash-proj-info">
@@ -298,16 +307,97 @@
       <div class="projects-grid">
 
         <!--
-          Project 01 — Gas Tracker Dashboard
-          The whole card is wrapped in <a> so it's clickable.
-          Update the href once you deploy the gas-tracker to Vercel.
+          Cards are <div>, not <a>. Each one carries two real links now — live
+          demo and source — and an <a> cannot nest inside another <a>. The
+          whole-card click is kept by stretching the primary link across the
+          card body (.proj-link::after), which leaves both links separately
+          focusable for keyboard and screen-reader users.
         -->
-        <a class="proj-card" href="https://gas-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+
+        <!-- Project 01 — Nova UI. The "demo" is the published Storybook, which is
+             the right artefact for a component library: every component with its
+             controls, states and a11y panel. -->
+        <div class="proj-card">
           <div class="proj-thumb">
             <span class="proj-thumb-num">01</span>
           </div>
           <div class="proj-body">
-            <p class="proj-num">Project 01 · Live</p>
+            <p class="proj-num">Project 01 · Open Source</p>
+            <h3 class="proj-name">Nova UI</h3>
+            <p class="proj-desc">An accessible React component library — 13 components
+               built with no headless UI dependency, with correct ARIA, keyboard
+               interaction and focus management proven by 142 interaction and axe
+               tests running in CI.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">React</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">ARIA</span>
+              <span class="proj-tag">Testing Library</span>
+              <span class="proj-tag">axe</span>
+            </div>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://chinyereee.github.io/nova-ui/" target="_blank" rel="noopener noreferrer">Open Storybook →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/nova-ui" target="_blank" rel="noopener noreferrer" aria-label="Nova UI source on GitHub">Code ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 02 — Infernet node monitor -->
+        <div class="proj-card">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">02</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 02 · Live</p>
+            <h3 class="proj-name">Ritual Node Monitor</h3>
+            <p class="proj-desc">A node fleet and job monitoring dashboard for Ritual's
+               Infernet, built against a mocked API matching the documented CLI and REST
+               schema — fleet health, job throughput, and per-node drill-down.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">Tailwind</span>
+              <span class="proj-tag">Recharts</span>
+            </div>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://ritual-node-monitor-demo.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/ritual-node-monitor-demo" target="_blank" rel="noopener noreferrer" aria-label="Ritual Node Monitor source on GitHub">Code ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 03 — Rain card issuing -->
+        <div class="proj-card">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">03</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 03 · Live</p>
+            <h3 class="proj-name">Rain Card Issuing</h3>
+            <p class="proj-desc">A frontend and documentation demo for a card issuing
+               integration, built against a mocked endpoint matching Rain's documented
+               sandbox API — the issue-to-activation path with the developer docs that
+               sit beside it.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">Tailwind</span>
+              <span class="proj-tag">API Docs</span>
+            </div>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://rain-card-issuing-demo.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/rain-card-issuing-demo" target="_blank" rel="noopener noreferrer" aria-label="Rain Card Issuing source on GitHub">Code ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 04 — Gas Tracker Dashboard -->
+        <div class="proj-card">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">04</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 04 · Live</p>
             <h3 class="proj-name">Gas Tracker Dashboard</h3>
             <p class="proj-desc">Real-time Ethereum gas price tracker with a 24-hour
                history chart and a "transact now?" indicator. Live data via the
@@ -318,20 +408,20 @@
               <span class="proj-tag">Tailwind</span>
               <span class="proj-tag">Etherscan API</span>
             </div>
-            <span class="proj-link">Open Live Demo →</span>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://gas-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/gas-tracker" target="_blank" rel="noopener noreferrer" aria-label="Gas Tracker Dashboard source on GitHub">Code ↗</a>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!--
-          Project 02 — AI Article Summarizer
-          Update the href once you deploy the ai-summarizer to Vercel.
-        -->
-        <a class="proj-card" href="https://ai-summarizer-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+        <!-- Project 05 — AI Article Summarizer -->
+        <div class="proj-card">
           <div class="proj-thumb">
-            <span class="proj-thumb-num">02</span>
+            <span class="proj-thumb-num">05</span>
           </div>
           <div class="proj-body">
-            <p class="proj-num">Project 02 · Live</p>
+            <p class="proj-num">Project 05 · Live</p>
             <h3 class="proj-name">AI Article Summarizer</h3>
             <p class="proj-desc">Paste any article URL and get back a clean summary with
                the key points pulled out. Built around Groq with Mozilla Readability for
@@ -342,20 +432,20 @@
               <span class="proj-tag">shadcn/ui</span>
               <span class="proj-tag">Groq AI</span>
             </div>
-            <span class="proj-link">Open Live Demo →</span>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://ai-summarizer-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/ai-summarizer" target="_blank" rel="noopener noreferrer" aria-label="AI Article Summarizer source on GitHub">Code ↗</a>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!--
-          Project 03 — DeFi Portfolio Tracker
-          Update the href once you deploy the defi-tracker to Vercel.
-        -->
-        <a class="proj-card" href="https://defi-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+        <!-- Project 06 — DeFi Portfolio Tracker -->
+        <div class="proj-card">
           <div class="proj-thumb">
-            <span class="proj-thumb-num">03</span>
+            <span class="proj-thumb-num">06</span>
           </div>
           <div class="proj-body">
-            <p class="proj-num">Project 03 · Live</p>
+            <p class="proj-num">Project 06 · Live</p>
             <h3 class="proj-name">DeFi Portfolio Tracker</h3>
             <p class="proj-desc">Paste a wallet address (or ENS) and see its holdings
                across Ethereum, Polygon, and Base, with USD values and an allocation
@@ -366,19 +456,20 @@
               <span class="proj-tag">ethers.js</span>
               <span class="proj-tag">Recharts</span>
             </div>
-            <span class="proj-link">Open Live Demo →</span>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://defi-tracker-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/defi-tracker" target="_blank" rel="noopener noreferrer" aria-label="DeFi Portfolio Tracker source on GitHub">Code ↗</a>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!--
-          Project 04 — SaaS Dashboard
-        -->
-        <a class="proj-card" href="https://saas-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+        <!-- Project 07 — SaaS Dashboard -->
+        <div class="proj-card">
           <div class="proj-thumb">
-            <span class="proj-thumb-num">04</span>
+            <span class="proj-thumb-num">07</span>
           </div>
           <div class="proj-body">
-            <p class="proj-num">Project 04 · Live</p>
+            <p class="proj-num">Project 07 · Live</p>
             <h3 class="proj-name">SaaS Dashboard</h3>
             <p class="proj-desc">A clean, data-rich SaaS analytics dashboard with revenue
                charts, user metrics, and activity feeds. Designed for readability and
@@ -389,19 +480,20 @@
               <span class="proj-tag">Recharts</span>
               <span class="proj-tag">Tailwind</span>
             </div>
-            <span class="proj-link">Open Live Demo →</span>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://saas-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/saas-dashboard" target="_blank" rel="noopener noreferrer" aria-label="SaaS Dashboard source on GitHub">Code ↗</a>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!--
-          Project 05 — CRM Dashboard
-        -->
-        <a class="proj-card" href="https://crm-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+        <!-- Project 08 — CRM Dashboard -->
+        <div class="proj-card">
           <div class="proj-thumb">
-            <span class="proj-thumb-num">05</span>
+            <span class="proj-thumb-num">08</span>
           </div>
           <div class="proj-body">
-            <p class="proj-num">Project 05 · Live</p>
+            <p class="proj-num">Project 08 · Live</p>
             <h3 class="proj-name">CRM Dashboard</h3>
             <p class="proj-desc">A full-featured CRM dashboard with live contact and company
                management, task tracking, and deal pipeline. Data refreshes automatically
@@ -412,10 +504,109 @@
               <span class="proj-tag">Tailwind</span>
               <span class="proj-tag">Recharts</span>
             </div>
-            <span class="proj-link">Open Live Demo →</span>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://crm-dashboard-chinyereee.vercel.app" target="_blank" rel="noopener noreferrer">Open Live Demo →</a>
+              <a class="proj-code" href="https://github.com/Chinyereee/crm-dashboard" target="_blank" rel="noopener noreferrer" aria-label="CRM Dashboard source on GitHub">Code ↗</a>
+            </div>
           </div>
-        </a>
+        </div>
 
+      </div>
+
+      <!-- ══════════════════════════════════
+           RECENT ON GITHUB
+
+           The list below is rendered statically on purpose, so the section is
+           never empty: a visitor with JavaScript off, an offline visitor, or one
+           whose IP has already spent the unauthenticated GitHub rate limit still
+           sees real repositories. github.js swaps in live data when the fetch
+           succeeds, and leaves this markup alone when it doesn't.
+
+           Static entries carry a month, not "3 days ago" — a hardcoded relative
+           date would silently rot. The live render is what says "3 days ago".
+      ══════════════════════════════════ -->
+      <div class="gh-section">
+
+        <div class="gh-head">
+          <div>
+            <p class="eyebrow">Straight From The Source</p>
+            <h2 class="gh-title">Recent on GitHub</h2>
+          </div>
+          <a class="gh-all" href="https://github.com/Chinyereee?tab=repositories"
+             target="_blank" rel="noopener noreferrer">All repositories ↗</a>
+        </div>
+
+        <ul class="gh-list" id="ghList">
+
+          <li class="gh-item">
+            <a class="gh-item-link" href="https://github.com/Chinyereee/nova-ui" target="_blank" rel="noopener noreferrer">
+              <span class="gh-item-name">nova-ui</span>
+              <span class="gh-item-desc">An accessible React component library — 13 components, correct ARIA, keyboard interaction and focus management, proven by 142 tests in CI.</span>
+              <span class="gh-item-foot">
+                <span class="gh-lang"><i class="gh-dot" style="background:#3178c6"></i>TypeScript</span>
+                <span class="gh-when">pushed Sep 2026</span>
+              </span>
+            </a>
+          </li>
+
+          <li class="gh-item">
+            <a class="gh-item-link" href="https://github.com/Chinyereee/ritual-node-monitor-demo" target="_blank" rel="noopener noreferrer">
+              <span class="gh-item-name">ritual-node-monitor-demo</span>
+              <span class="gh-item-desc">Node fleet and job monitoring dashboard for Infernet, built against a mocked API matching the documented CLI/REST schema.</span>
+              <span class="gh-item-foot">
+                <span class="gh-lang"><i class="gh-dot" style="background:#3178c6"></i>TypeScript</span>
+                <span class="gh-when">pushed Aug 2026</span>
+              </span>
+            </a>
+          </li>
+
+          <li class="gh-item">
+            <a class="gh-item-link" href="https://github.com/Chinyereee/rain-card-issuing-demo" target="_blank" rel="noopener noreferrer">
+              <span class="gh-item-name">rain-card-issuing-demo</span>
+              <span class="gh-item-desc">Frontend and docs demo for a card issuing integration flow, built against a mocked endpoint matching Rain's documented sandbox API.</span>
+              <span class="gh-item-foot">
+                <span class="gh-lang"><i class="gh-dot" style="background:#3178c6"></i>TypeScript</span>
+                <span class="gh-when">pushed Aug 2026</span>
+              </span>
+            </a>
+          </li>
+
+          <li class="gh-item">
+            <a class="gh-item-link" href="https://github.com/Chinyereee/saas-dashboard" target="_blank" rel="noopener noreferrer">
+              <span class="gh-item-name">saas-dashboard</span>
+              <span class="gh-item-desc">A data-rich SaaS analytics dashboard built with Next.js, TypeScript, Tailwind and Recharts, with live mock data on an 8-second refresh.</span>
+              <span class="gh-item-foot">
+                <span class="gh-lang"><i class="gh-dot" style="background:#3178c6"></i>TypeScript</span>
+                <span class="gh-when">pushed May 2026</span>
+              </span>
+            </a>
+          </li>
+
+          <li class="gh-item">
+            <a class="gh-item-link" href="https://github.com/Chinyereee/crm-dashboard" target="_blank" rel="noopener noreferrer">
+              <span class="gh-item-name">crm-dashboard</span>
+              <span class="gh-item-desc">A corporate CRM dashboard with contact management, company tracking, task management and pipeline analytics.</span>
+              <span class="gh-item-foot">
+                <span class="gh-lang"><i class="gh-dot" style="background:#3178c6"></i>TypeScript</span>
+                <span class="gh-when">pushed May 2026</span>
+              </span>
+            </a>
+          </li>
+
+          <li class="gh-item">
+            <a class="gh-item-link" href="https://github.com/Chinyereee/ethers-v5-to-v6-codemod" target="_blank" rel="noopener noreferrer">
+              <span class="gh-item-name">ethers-v5-to-v6-codemod</span>
+              <span class="gh-item-desc">Automates 90.3% of the ethers.js v5 → v6 migration using jscodeshift transforms. 502 lines changed on Uniswap v3-periphery, 0 false positives.</span>
+              <span class="gh-item-foot">
+                <span class="gh-lang"><i class="gh-dot" style="background:#3178c6"></i>TypeScript</span>
+                <span class="gh-when">pushed May 2026</span>
+              </span>
+            </a>
+          </li>
+
+        </ul>
+
+        <p class="gh-note" id="ghNote">Most recently pushed public repositories.</p>
       </div>
 
       <!-- Featured Open Source -->
@@ -449,9 +640,11 @@
     </div>
   </section>
 
-  <!-- Scripts: nav.js is shared, sparkles.js only loads on home -->
+  <!-- Scripts: nav.js is shared, sparkles.js only loads on home,
+       github.js progressively upgrades the Recent on GitHub list -->
   <script src="nav.js"></script>
   <script src="sparkles.js"></script>
+  <script src="github.js"></script>
 
   <script>
     function toggleSkills() {
