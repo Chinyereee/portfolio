@@ -74,21 +74,38 @@
         <div class="dash-card">
           <div class="dash-card-header">
             <span class="dash-card-dot"></span>
-            <span class="dash-card-title">Skills</span>
+            <span class="dash-card-title">Technology Stack</span>
             <button class="dash-card-link" id="skillsToggle" type="button" onclick="toggleSkills()" aria-expanded="false" aria-controls="dashSkills">View all</button>
           </div>
           <div class="dash-skills-grid" id="dashSkills">
-            <span class="dash-skill">⚛ React</span>
-            <span class="dash-skill">N Next.js</span>
-            <span class="dash-skill">TS TypeScript</span>
-            <span class="dash-skill">🌬 Tailwind CSS</span>
-            <!-- hidden by default -->
-            <span class="dash-skill dash-skill-extra" aria-hidden="true">⟠ Ethers.js</span>
-            <span class="dash-skill dash-skill-extra" aria-hidden="true">◈ Git</span>
-            <span class="dash-skill dash-skill-extra" aria-hidden="true">JS JavaScript</span>
-            <span class="dash-skill dash-skill-extra" aria-hidden="true">🔷 shadcn/ui</span>
-            <span class="dash-skill dash-skill-extra" aria-hidden="true">📊 Recharts</span>
-            <span class="dash-skill dash-skill-extra" aria-hidden="true">🔗 REST APIs</span>
+            <div class="skill-group">
+              <p class="skill-group-label">Frameworks &amp; build tools</p>
+              <div class="skill-chip-list">
+                <span class="dash-skill">React</span>
+                <span class="dash-skill">Next.js</span>
+                <span class="dash-skill">Vue.js</span>
+                <span class="dash-skill">Vite</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-label">Languages &amp; styling</p>
+              <div class="skill-chip-list">
+                <span class="dash-skill">TypeScript</span>
+                <span class="dash-skill">JavaScript</span>
+                <span class="dash-skill">Java</span>
+                <span class="dash-skill">Tailwind CSS</span>
+              </div>
+            </div>
+            <div class="skill-group dash-skill-extra" aria-hidden="true">
+              <p class="skill-group-label">Web3, UI &amp; data tools</p>
+              <div class="skill-chip-list">
+                <span class="dash-skill">ethers.js</span>
+                <span class="dash-skill">Git</span>
+                <span class="dash-skill">shadcn/ui</span>
+                <span class="dash-skill">Recharts</span>
+                <span class="dash-skill">REST APIs</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -174,7 +191,7 @@
       <div class="hero-bottom">
           <div class="hero-btns">
             <a href="#projects" class="hero-btn-primary">View My Work →</a>
-            <a href="Chinyere_John-Nnah_CV_v2.pdf" download class="hero-btn-secondary">Download Resume ↓</a>
+            <a href="Chinyere_John-Nnah_CV_v2.pdf" download="Chinyere-John-Nnah-Resume.pdf" class="hero-btn-secondary">Download Resume ↓</a>
             <a href="Chinyere_John-Nnah_CV_v2.pdf" target="_blank" rel="noopener noreferrer" class="hero-btn-secondary">View CV →</a>
           </div>
           <div class="hero-social-row">

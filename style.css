@@ -1,6 +1,6 @@
 /* ============================================================
    CHINYERE JOHN-NNAH — Portfolio Stylesheet
-   Theme: Ink & Purple — near-black surfaces, one accent
+   Theme: Ink & Purple — near-black surfaces, purple actions, mint status cues
    ============================================================ */
 
 /* Fonts are loaded with <link> tags in index.html <head> rather than @import
@@ -39,20 +39,14 @@
   --text-3: rgba(244,244,245,0.50);
   --text-4: rgba(244,244,245,0.42);
 
-  /* ── Accent ───────────────────────────────────────────
-     Exactly one, and it is the site's own --purple-bright. #c084fc
-     measures 7.5:1 on --ink and 6.1:1 on the deepest surface, so
-     it carries body-size links on every level without a contrast
-     exemption. It always did; what failed here was --purple
-     #490588 at 1.66:1, used as label text and as the fade-out
-     stop in gradient-clipped headlines. Emphasis only; never a
-     surface colour. --accent-deep is dark (2.3:1) and is
-     therefore restricted to decorative gradient fades, never
-     to text. */
+  /* Purple is the single brand accent for links and emphasis. The
+     high-contrast mint signal below is reserved for tiny state markers,
+     never for body copy. */
   --accent:        #c084fc;
   --accent-deep:   #6b21a8;
   --accent-dim:    rgba(192,132,252,0.09);
   --accent-border: rgba(192,132,252,0.30);
+  --signal:        #56e6cf;
 
   --easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -980,15 +974,9 @@ nav {
   }
 }
 
-/* ── SKILLS LIMIT FILTER (Shows top 4 badges initially) ── */
-.dash-skills-grid .dash-skill:nth-child(n+5) {
-  display: none;
-}
-.dash-skills-grid.show-all .dash-skill:nth-child(n+5) {
-  display: inline-block;
-}
+/* The extra technology group is revealed by the accessible Skills control. */
 .dash-skill-extra[aria-hidden="true"] { display: none !important; }
-.dash-skills-grid.show-all .dash-skill-extra[aria-hidden="false"] { display: inline-flex; }
+.dash-skills-grid.show-all .dash-skill-extra[aria-hidden="false"] { display: grid; }
 
 /* ── SCROLLABLE WINDOW FOR PROJECTS (Lined up to show exactly 3) ── */
 .scrollable-project-window {
@@ -1639,3 +1627,29 @@ nav {
   }
 
 }
+
+/* Compact, categorized stack panel; purple stays the brand accent and mint
+   marks the small live/status details. */
+.dash-skills-grid { display: grid; gap: 0.85rem; }
+.skill-group { display: grid; gap: 0.45rem; }
+.skill-group-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--accent);
+  font: 500 0.58rem var(--font-mono);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.skill-group-label::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 7px rgba(86, 230, 207, 0.55);
+}
+.skill-chip-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skill-chip-list .dash-skill { border-radius: 999px; padding: 0.3rem 0.65rem; }
+.dash-card-dot { background: var(--signal); box-shadow: 0 0 8px rgba(86, 230, 207, 0.6); }
