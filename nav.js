@@ -1,29 +1,12 @@
-// ============================================================
-//  Portfolio Navigation
-//  Highlights the nav link matching whichever section is on screen.
-// ============================================================
-
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('section.page');
-
-if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
-  const linkFor = {};
-  navLinks.forEach(link => {
-    const id = link.getAttribute('href');
-    if (id && id.startsWith('#')) linkFor[id.slice(1)] = link;
-  });
-
-  const spy = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        const link = linkFor[entry.target.id];
-        if (link) link.classList.toggle('active', entry.isIntersecting);
-      });
-    },
-    // Fire when a section crosses the middle of the viewport, so the highlight
-    // changes at the point the section actually feels "current".
-    { rootMargin: '-45% 0px -45% 0px' }
-  );
-
-  sections.forEach(section => spy.observe(section));
-}
+// Shared active-page indication for the hybrid portfolio navigation.
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.nav-link[href]').forEach((link) => {
+  const target = link.getAttribute('href');
+  if (target === currentPage) {
+    link.classList.add('active');
+    link.setAttribute('aria-current', 'page');
+  } else if (target.endsWith('.html')) {
+    link.classList.remove('active');
+    link.removeAttribute('aria-current');
+  }
+});
