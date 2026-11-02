@@ -39,11 +39,12 @@
   <!-- ══════════════════════════════════
        NAVIGATION (shared on every page)
   ══════════════════════════════════ -->
-  <nav>
+  <nav aria-label="Main navigation">
     <a class="nav-logo" href="#home" style="text-decoration:none;">CJ</a>
     <div class="nav-links">
   <a href="#about" class="nav-link">About Me</a>
   <a href="#projects" class="nav-link">Projects</a>
+  <a href="mailto:chinyerejohnnna@gmail.com" class="nav-link nav-contact">Contact</a>
 </div>
   </nav>
 
@@ -58,12 +59,12 @@
       <!-- LEFT: Hero text -->
       <div class="home-left">
         <div class="hero-badge">Frontend Developer <span class="hero-badge-dot">•</span> Websites &amp; Web Apps</div>
-        <div class="hero-name">
-          <span class="first">I build modern,</span>
-          <span class="last">scalable &amp; impactful</span>
-          <span class="first" style="margin-top:0.1em;">web experiences.</span>
-        </div>
-        <p class="hero-sub">A frontend developer in Port Harcourt building fast, accessible websites and web apps with React, Next.js and TypeScript — from business sites to data-heavy dashboards, with a specialism in Web3 interfaces.</p>
+        <h1 class="hero-name">
+          <span class="first">I build clear,</span>
+          <span class="last">accessible interfaces</span>
+          <span class="first">for complex products.</span>
+        </h1>
+        <p class="hero-sub">Frontend developer in Port Harcourt, Nigeria, focused on React, TypeScript, and Web3. I turn complex product and blockchain data into fast, responsive interfaces.</p>
       </div>
 
       <!-- RIGHT: Dashboard cards -->
@@ -74,20 +75,20 @@
           <div class="dash-card-header">
             <span class="dash-card-dot"></span>
             <span class="dash-card-title">Skills</span>
-            <button class="dash-card-link" id="skillsToggle" onclick="toggleSkills()">View all</button>
+            <button class="dash-card-link" id="skillsToggle" type="button" onclick="toggleSkills()" aria-expanded="false" aria-controls="dashSkills">View all</button>
           </div>
-          <div class="dash-skills-grid">
+          <div class="dash-skills-grid" id="dashSkills">
             <span class="dash-skill">⚛ React</span>
             <span class="dash-skill">N Next.js</span>
             <span class="dash-skill">TS TypeScript</span>
             <span class="dash-skill">🌬 Tailwind CSS</span>
             <!-- hidden by default -->
-            <span class="dash-skill dash-skill-extra" style="display:none;">⟠ Ethers.js</span>
-            <span class="dash-skill dash-skill-extra" style="display:none;">◈ Git</span>
-            <span class="dash-skill dash-skill-extra" style="display:none;">JS JavaScript</span>
-            <span class="dash-skill dash-skill-extra" style="display:none;">🔷 shadcn/ui</span>
-            <span class="dash-skill dash-skill-extra" style="display:none;">📊 Recharts</span>
-            <span class="dash-skill dash-skill-extra" style="display:none;">🔗 REST APIs</span>
+            <span class="dash-skill dash-skill-extra" aria-hidden="true">⟠ Ethers.js</span>
+            <span class="dash-skill dash-skill-extra" aria-hidden="true">◈ Git</span>
+            <span class="dash-skill dash-skill-extra" aria-hidden="true">JS JavaScript</span>
+            <span class="dash-skill dash-skill-extra" aria-hidden="true">🔷 shadcn/ui</span>
+            <span class="dash-skill dash-skill-extra" aria-hidden="true">📊 Recharts</span>
+            <span class="dash-skill dash-skill-extra" aria-hidden="true">🔗 REST APIs</span>
           </div>
         </div>
 
@@ -100,6 +101,15 @@
             <a href="#projects" class="dash-card-link">View all →</a>
           </div>
           <div class="dash-projects" id="dashProjects">
+
+            <a href="https://github.com/Chinyereee/flash-loan-arbitrage" target="_blank" rel="noopener noreferrer" class="dash-proj">
+              <div class="dash-proj-icon" aria-hidden="true">◈</div>
+              <div class="dash-proj-info">
+                <p class="dash-proj-name">Flash Loan Arbitrage</p>
+                <p class="dash-proj-desc">Read-only Ethereum and Solana route quotes with provider and hop details.</p>
+              </div>
+              <span class="dash-proj-arrow" aria-hidden="true">↗</span>
+            </a>
 
             <a href="https://github.com/Chinyereee/nova-ui" target="_blank" rel="noopener noreferrer" class="dash-proj">
               <div class="dash-proj-icon">⬡</div>
@@ -193,7 +203,7 @@
     <div class="about-wrap">
 
       <p class="eyebrow">Who I Am</p>
-      <h1 class="page-heading">About <em>Me</em></h1>
+      <h2 class="page-heading">About <em>Me</em></h2>
       <div class="page-underline"></div>
 
       <div class="bio-section">
@@ -295,7 +305,7 @@
     <div class="projects-wrap">
 
       <p class="eyebrow">What I've Shipped</p>
-      <h1 class="page-heading">My <em>Projects</em></h1>
+      <h2 class="page-heading">My <em>Projects</em></h2>
       <div class="page-underline"></div>
 
       <div class="projects-grid">
@@ -505,6 +515,28 @@
           </div>
         </div>
 
+        <!-- Project 09 — Flash Loan Arbitrage route comparison prototype -->
+        <div class="proj-card">
+          <div class="proj-thumb">
+            <span class="proj-thumb-num">09</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-num">Project 09 · Read-only prototype</p>
+            <h3 class="proj-name">Flash Loan Arbitrage Route Lab</h3>
+            <p class="proj-desc">A read-only DeFi route-comparison interface that can fetch Ethereum and Solana quotes, show quote age and provider status, and expand per-hop amounts. Borrowing fees and gas costs are not connected, so it does not label gross output as profit. No transactions are sent.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">React</span>
+              <span class="proj-tag">TypeScript</span>
+              <span class="proj-tag">ethers.js</span>
+              <span class="proj-tag">Jupiter API</span>
+              <span class="proj-tag">DeFi</span>
+            </div>
+            <div class="proj-actions">
+              <a class="proj-link" href="https://github.com/Chinyereee/flash-loan-arbitrage" target="_blank" rel="noopener noreferrer" aria-label="Flash Loan Arbitrage source on GitHub">View repository →</a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- ══════════════════════════════════
@@ -643,11 +675,15 @@
     function toggleSkills() {
       var extras = document.querySelectorAll('.dash-skill-extra');
       var btn = document.getElementById('skillsToggle');
-      var allHidden = extras[0].style.display === 'none';
+      var skillsGrid = document.getElementById('dashSkills');
+      if (!btn || !skillsGrid || !extras.length) return;
+      var expanded = btn.getAttribute('aria-expanded') !== 'true';
       extras.forEach(function(el) {
-        el.style.display = allHidden ? 'inline-flex' : 'none';
+        el.setAttribute('aria-hidden', String(!expanded));
       });
-      btn.textContent = allHidden ? 'Show less' : 'View all';
+      skillsGrid.classList.toggle('show-all', expanded);
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.textContent = expanded ? 'Show less' : 'View all';
     }
   </script>
 

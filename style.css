@@ -172,6 +172,15 @@ nav {
 }
 .nav-link:hover { color: var(--text); }
 .nav-link:hover::after { transform: scaleX(1); }
+.nav-contact {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.nav-contact::after { display: none; }
+.nav-contact:hover { border-color: var(--accent); background: var(--ink-3); }
 
 @media (max-width: 640px) {
   .nav-links { gap: 1.25rem; }
@@ -978,6 +987,8 @@ nav {
 .dash-skills-grid.show-all .dash-skill:nth-child(n+5) {
   display: inline-block;
 }
+.dash-skill-extra[aria-hidden="true"] { display: none !important; }
+.dash-skills-grid.show-all .dash-skill-extra[aria-hidden="false"] { display: inline-flex; }
 
 /* ── SCROLLABLE WINDOW FOR PROJECTS (Lined up to show exactly 3) ── */
 .scrollable-project-window {
@@ -1086,6 +1097,7 @@ nav {
   flex-direction: column;
   text-align: left;
   margin-bottom: 1.25rem;
+  margin-top: 0;
 }
 .home-left .hero-name .first {
   font-family: var(--font-display);
