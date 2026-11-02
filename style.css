@@ -1685,34 +1685,12 @@ nav {
 }
 
 
-/* Keep the primary actions and contact links beside the landing introduction. */
-.home-left { align-items: flex-start; text-align: left; }
-.home-left .hero-bottom {
-  grid-column: auto;
-  margin-top: 1.4rem;
-  padding-top: 0;
-  align-items: flex-start;
-}
-.home-left .hero-btns {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.home-left .hero-btns > :nth-child(n) { justify-self: auto; }
-.home-left .hero-social-row { justify-content: flex-start; gap: 0.65rem; }
-.home-left .hero-social {
+
+.hero-bottom .hero-social {
   width: auto;
   min-height: 44px;
   padding: 0 0.85rem;
   gap: 0.55rem;
   font-size: 0.76rem;
 }
-.home-left .social-mark { font-size: 0.84rem; font-weight: 700; }
-.home-left .hero-email { margin-top: 0.2rem; text-align: left; }
-@media (max-width: 900px) {
-  .home-left { align-items: center; text-align: center; }
-  .home-left .hero-bottom { align-items: center; margin-top: 1.4rem; }
-  .home-left .hero-social-row { justify-content: center; }
-  .home-left .hero-email { text-align: center; }
-}
+.hero-bottom .social-mark { font-size: 0.84rem; font-weight: 700; }
