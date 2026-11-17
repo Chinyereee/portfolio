@@ -4,7 +4,7 @@ export default function ProjectCard({ p }: { p: Project }) {
   return (
     <div className="proj-card">
       <div className="proj-thumb">
-        <span className="proj-thumb-num">{p.thumb}</span>
+        <span className="proj-thumb-num">{p.num}</span>
       </div>
       <div className="proj-body">
         <p className="proj-num">
