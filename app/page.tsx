@@ -65,7 +65,7 @@ export default function Home() {
             </Link>
             <a
               href="/Chinyere_John-Nnah_CV.Software-Engineer.pdf"
-              download="Chinyere-John-Nnah-Resume.pdf"
+              download="Chinyere_John-Nnah_CV.Software-Engineer.pdf"
               className="hero-btn-secondary"
             >
               Download Resume ↓
