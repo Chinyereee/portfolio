@@ -1,6 +1,6 @@
 export default function HeroArt() {
   return (
-    <svg className="hero-art" viewBox="0 0 590 190" role="img" aria-label="A design frame plus a code window: design and build">
+    <svg className="hero-art" viewBox="0 0 590 205" role="img" aria-label="A design frame plus a code window: design and build">
       <rect x="40" y="30" width="210" height="130" rx="10" fill="#1f1f1f" stroke="#b49aff" />
       <rect x="36" y="26" width="8" height="8" fill="#171717" stroke="#b49aff" />
       <rect x="246" y="26" width="8" height="8" fill="#171717" stroke="#b49aff" />
@@ -25,6 +25,8 @@ export default function HeroArt() {
       <rect x="428" y="96" width="70" height="6" rx="3" fill="#444" />
       <rect x="372" y="112" width="100" height="6" rx="3" fill="#444" />
       <rect x="358" y="128" width="24" height="6" rx="3" fill="#b49aff" opacity="0.85" />
+      <text x="145" y="190" textAnchor="middle" fontSize="12" fill="#888" fontFamily="Inter, sans-serif">design</text>
+      <text x="445" y="190" textAnchor="middle" fontSize="12" fill="#888" fontFamily="Inter, sans-serif">build</text>
     </svg>
   );
 }
