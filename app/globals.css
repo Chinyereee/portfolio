@@ -195,3 +195,10 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.4rem); }
 /* ── Round 4: skill icons ── */
 .tools li svg { width: 20px; height: 20px; flex: none; }
 .tools li img { flex: none; }
+
+/* ── Round 5: scale everything to 120% ── */
+html { font-size: 120%; }
+.wrap { max-width: 1280px; }
+.site-nav .wrap { height: 72px; }
+section { scroll-margin-top: 72px; }
+.tools li img, .tools li svg { width: 24px; height: 24px; }
