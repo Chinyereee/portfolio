@@ -202,3 +202,8 @@ html { font-size: 120%; }
 .site-nav .wrap { height: 72px; }
 section { scroll-margin-top: 72px; }
 .tools li img, .tools li svg { width: 24px; height: 24px; }
+
+/* ── Round 6: use more of the screen ── */
+.wrap { max-width: 1760px; padding-left: clamp(1.5rem, 5vw, 5rem); padding-right: clamp(1.5rem, 5vw, 5rem); }
+.hero-grid { grid-template-columns: 1fr 1fr; }
+.hero-grid .hero-art { max-width: 780px; justify-self: end; }
